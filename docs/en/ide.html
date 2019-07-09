@@ -81,10 +81,26 @@
 
 
 <div class="section embeddedIde" id="ide">
-    <div id ='ideIde' class = "ide getStarted" style="height:334.40000000000003px">
+    <div id ='ideIde' class = "ide getStarted" style="height:334.4px">
       <div id = 'ideIdeCenter' class = "ideCenter" >
          <div id = 'ideEditorDiv' class = 'ideEditorDiv' style="width:200px"></div>
          <div id = 'ideCanvasDiv' class = 'ideCanvasDiv'>
+            <div class="worldDropdown">
+
+              <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  Change World
+                  <span class="caret"></span>
+                </button>
+                <ul id="ideWorlds" class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                  <li><a>1x1</a></li>
+                  <li><a>4x4</a></li>
+                  <li><a>3x6</a></li>
+                  <li><a>7x7</a></li>
+                  <li><a>8x8</a></li>
+                </ul>
+              </div>
+            </div>
             <canvas id='ideCanvas' class = 'ideCanvas'></canvas>
          </div>
       </div>
@@ -129,36 +145,65 @@ STARTER_CODE = STARTER_CODE.trim();
 
  function main() {
    karelEditor = importEditorCode('ideEditor','ideEditorDiv', STARTER_CODE, true);
-     //importRunButtonBar('example1ButtonBar');
+    setupWorldDropdown();
     
-    $("[title]").tooltip({ position: "bottom center", opacity: 0.9});
     
-    initTabs();
     var canvas = document.getElementById('ideCanvas');
-    karelIde = KarelIde(karelEditor, canvas, '8x8', 0.4);
+    karelIde = KarelIde(karelEditor, canvas, '8x8', 0.0);
     $('#ideRunButton').click(function(){playClicked()});
     onresize();
     
  }
 
+ function setupWorldDropdown() {
+    console.log('setup world dropdown')
+    let ul = document.getElementById('ideWorlds')
+    
+    if (!ul.childNodes || ul.childNodes.length == 0) return;
+
+    // Iterate LIs
+    for (var itemi=0;itemi<ul.childNodes.length;itemi++) {
+        var li = ul.childNodes[itemi];
+        if(li.nodeName == "LI") {
+          var a = li.childNodes[0]
+          let worldName = a.innerHTML;
+          console.log(worldName)
+          a.onclick = () => setWorld(worldName);
+
+        }
+    }
+ }
+
+ function setWorld(worldName){
+    console.log('here we go', worldName)
+    karelIde.changeWorld(worldName)
+    changeToPlayButton()
+ }
+
  function playClicked() {
   if(buttonState == 'play') {
     karelIde.playButton();
-      
-      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
-      $('#ideRunButton').html(resetText);
-      buttonState = 'reset';
-     } else if (buttonState == 'reset') {
-      karelIde.stopButton();
-      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
-      $('#ideRunButton').html(playText);
-      buttonState = 'play';
-     }
-  
+    changeToResetButton();
+   } else if (buttonState == 'reset') {
+    karelIde.stopButton();
+    changeToPlayButton();
+   }
+  }
+
+  function changeToPlayButton() {
+    var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+    $('#ideRunButton').html(playText);
+    buttonState = 'play';
+  }
+
+  function changeToResetButton() {
+    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+    $('#ideRunButton').html(resetText);
+    buttonState = 'reset';  
   }
 
  function onresize() { 
-    var parentHeight = 334.40000000000003;
+    var parentHeight = 334.4;
     var canvasWidth = 300
     var parentWidth = $("#ide").width();
     console.log('pw: ' + parentWidth);

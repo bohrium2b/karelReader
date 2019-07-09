@@ -12,7 +12,7 @@
 function KarelIde(editor, canvas, initialWorld, speed = 0.5, canvasWidth = 1000, canvasHeight=1000) {
 
    function calcHeartbeatsForSpeed(speed) {
-    zeroHb = 40;
+    zeroHb = 80;
     oneHb = 0;
     if(speed < 0.0 || speed >= 1.0) console.error('speed out of range', speed)
     return parseInt((1 - speed) * zeroHb)
