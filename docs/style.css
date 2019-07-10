@@ -98,12 +98,11 @@ p {
 }
 
 .bookSideBar {
-  width: 200px;
-  min-width:200px; 
+  width: 230px;
+  min-width:230px; 
   /*background-color:#DDDDDD; */
   color:#646464;
   padding:20px; 
-  text-align: right;
   border-right: 1px solid black;
 }
 
@@ -122,7 +121,13 @@ p {
   margin-top:5px;
   margin-bottom:5px;
   font-size:15px;
-  padding-right:20px;
+  cursor:pointer;
+  padding-left:10px;
+}
+
+.chapterTab:hover{
+background: #f1f1f1;
+ /* make this whatever you want */
 }
 
 .sideBarTitle {
@@ -137,7 +142,8 @@ p {
   /*color:#CCCCCC;*/
   color:black;
   font-size:26px;
-  text-align: center;
+  text-align: left;
+  padding-left:10px;
 }
 
 .sideBarSelected {

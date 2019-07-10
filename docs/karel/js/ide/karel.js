@@ -6,12 +6,16 @@
  * KarelModel which is rendered using a static KarelView
  * draw method.
  */
-function Karel(canvasModel) {
+function Karel(canvasModel, language) {
 
+  console.log('lang', language)
 
-   var that = {};
+  // uses a flag to know if it is loaded
+  var that = {
+    'isLoaded':false
+  };
 
-   var karelModel = KarelModel();
+  var karelModel = KarelModel();
    
   that.draw = function(c) {
      KarelView.draw(canvasModel, karelModel, c);
@@ -141,11 +145,46 @@ function Karel(canvasModel) {
     return karelModel;
   }
 
-  // add translation methods
-  for(original in Karel.translationDict) {
-    translation = Karel.translationDict[original]
-    that[translation] = that[original];
+  // load language API
+  let path = "../karel/js/api/" + language + ".json"
+  loadDoc(path, function(jsonTxt) {
+    var json = JSON.parse(jsonTxt)
+    initLanguageAPI(json)
+  })
+  
+  function initLanguageAPI(transDict) {
+    console.log(transDict)
+    // add translation to instructions set
+    for(original in transDict) {
+      translation = transDict[original]
+      if(original in Karel.instructions){
+        v = Karel.instructions[original]
+        Karel.instructions[translation] = v
+      }
+      if(original in Karel.predicates) {
+        v = Karel.predicates[original]
+        Karel.predicates[translation] = v
+      }
+    }
+    console.log('that')
+    console.log(that)
+
+    // add translation methods
+    for(original in transDict) {
+
+      console.log(that['move'])
+      translation = transDict[original]
+      that[translation] = that[original];
+    }
+    that.isLoaded = true;
   }
+
+  // don't return the class until the language model has been loaded
+  while(!that.isLoaded) {
+    console.log('not loaded...')
+  }
+
+  console.log(that)
 
   return that;
 }
@@ -168,65 +207,49 @@ Karel.predicates = {
    cornerColorIs:2, random:2
 };
 
-Karel.translationDict = {
-  'move':'moverse',
-  'pickBeeper':'recogerCono',
-  'putBeeper':'ponerCono',
+// Karel.translationDict = {
+//   'move':'moverse',
+//   'pickBeeper':'recogerCono',
+//   'putBeeper':'ponerCono',
 
-  'turnLeft':'girarIzquierda',
-  'turnRight':'girarDerecha',
-  'turnAround':'mediaVeulta',
+//   'turnLeft':'girarIzquierda',
+//   'turnRight':'girarDerecha',
+//   'turnAround':'mediaVeulta',
 
-  'paintCorner':'pintarEsquina',
+//   'paintCorner':'pintarEsquina',
 
-  'frontIsClear':'frenteDespejado',
-  'frontIsBlocked':'frenteBloqueado',
+//   'frontIsClear':'frenteDespejado',
+//   'frontIsBlocked':'frenteBloqueado',
 
-  'leftIsClear':'izquierdaDespejada',
-  'leftIsBlocked':'izquierdaBloqueada',
+//   'leftIsClear':'izquierdaDespejada',
+//   'leftIsBlocked':'izquierdaBloqueada',
 
-  'rightIsClear':'derechaDespejada',
-  'rightIsBlocked':'derechaBloqueada',
+//   'rightIsClear':'derechaDespejada',
+//   'rightIsBlocked':'derechaBloqueada',
 
-  'beepersPresent':'conosPresentes',
-  'noBeepersPresent':'conosAusentes',
+//   'beepersPresent':'conosPresentes',
+//   'noBeepersPresent':'conosAusentes',
 
-  'beepersInBag':'bolsaConConos',
-  'noBeepersInBag':'bolsaSinConos',
+//   'beepersInBag':'bolsaConConos',
+//   'noBeepersInBag':'bolsaSinConos',
 
-  'facingNorth':'rumboNorte',
-  'notFacingNorth':'sinRumboNorte',
+//   'facingNorth':'rumboNorte',
+//   'notFacingNorth':'sinRumboNorte',
 
-  'facingSouth':'rumboSur',
-  'notFacingSouth':'sinRumboSur',
+//   'facingSouth':'rumboSur',
+//   'notFacingSouth':'sinRumboSur',
 
-  'facingEast':'rumboEste',
-  'notFacingEast':'sinRumboEste',
+//   'facingEast':'rumboEste',
+//   'notFacingEast':'sinRumboEste',
 
-  'facingWest':'rumboOeste',
-  'notFacingWest':'sinRumboOeste',
+//   'facingWest':'rumboOeste',
+//   'notFacingWest':'sinRumboOeste',
 
-  'random':'aleatorio',
+//   'random':'aleatorio',
 
-  'cornerColorIs':'colorEsquinaEs'
+//   'cornerColorIs':'colorEsquinaEs'
 
-}
-
-Karel.addTranslation = function() {
-  for(original in Karel.translationDict) {
-    translation = Karel.translationDict[original]
-    if(original in Karel.instructions){
-      v = Karel.instructions[original]
-      Karel.instructions[translation] = v
-    }
-    if(original in Karel.predicates) {
-      v = Karel.predicates[original]
-      Karel.predicates[translation] = v
-    }
-  }
-}
-
-Karel.addTranslation()
+// }
 
 
 

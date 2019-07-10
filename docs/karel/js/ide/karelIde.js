@@ -9,7 +9,7 @@
  * that Karel doesn't try to render before images have been
  * loaded.
  */
-function KarelIde(editor, canvas, initialWorld, speed = 0.5, canvasWidth = 1000, canvasHeight=1000) {
+function KarelIde(editor, canvas, initialWorld, speed = 0.5, lang="es", canvasWidth = 1000, canvasHeight=1000) {
 
    function calcHeartbeatsForSpeed(speed) {
     zeroHb = 80;
@@ -29,6 +29,7 @@ function KarelIde(editor, canvas, initialWorld, speed = 0.5, canvasWidth = 1000,
    var REFRESH_HEARTBEATS = 100;
    var COOKIE_NAME = 'karelCode';
 
+
    // instance variables
    if (canvas)var context = canvas.getContext('2d');
    var actionCountdown = ACTION_HEARTBEATS;
@@ -37,7 +38,7 @@ function KarelIde(editor, canvas, initialWorld, speed = 0.5, canvasWidth = 1000,
    var canvasModel = CanvasModel(canvasWidth, canvasHeight);
    var worldLoaded = false;
 
-   var karel = Karel(canvasModel);
+   var karel = Karel(canvasModel, lang);
    var compileEngine = null;
 
    // state flags
@@ -45,6 +46,7 @@ function KarelIde(editor, canvas, initialWorld, speed = 0.5, canvasWidth = 1000,
    var imagesReady = false;
    var numActions = 0;
    var silent = false;
+
 
    /**
     * Function: Init

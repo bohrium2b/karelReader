@@ -1,0 +1,478 @@
+<html><head>
+<title> Karel Reader </title><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><script src="../plugins/jquery.min.js"></script><link href="../plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/><script src="../plugins/bootstrap/js/bootstrap.min.js"></script><link href="../style.css" rel="stylesheet"/><script src="..//karel/js/html/websiteImports.js"></script><script>importCss();</script><script>importJs();</script></head><body><!-- container --><div class="bookContainer">
+<!-- side bar -->
+<div class="bookSideBar">
+<div class="homeLink">
+ <a href="../de/intro.html">
+<span aria-hidden="true" class="glyphicon glyphicon-home"></span> Karel</a> 
+</div>
+<hr/>
+<div class="chapterTab" onclick="location.href='../de/chapter1.html'">
+<a class="bookLink btn btn-link" href="../de/chapter1.html">1 - Treffen Sie Karel</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter2.html'">
+<a class="bookLink btn btn-link" href="../de/chapter2.html">2 - Programmierung</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter3.html'">
+<a class="bookLink btn btn-link" href="../de/chapter3.html">3 - Neue Methoden</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter4.html'">
+<a class="bookLink btn btn-link" href="../de/chapter4.html">4 - Zersetzung</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter5.html'">
+<a class="bookLink btn btn-link" href="../de/chapter5.html">5 - Für Schleifen</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter6.html'">
+<a class="bookLink btn btn-link" href="../de/chapter6.html">6 - While-Schleifen</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter7.html'">
+<a class="bookLink btn btn-link" href="../de/chapter7.html">7 - Bedingungen</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter8.html'">
+<a class="bookLink btn btn-link" href="../de/chapter8.html">8 - Verfeinerung</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter9.html'">
+<a class="bookLink btn btn-link" href="../de/chapter9.html">9 - SuperKarel</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/reference.html'">
+<a class="bookLink btn btn-link" href="../de/reference.html">10 - Referenz</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/ide.html'">
+<a class="bookLink btn btn-link" href="../de/ide.html">11 - Code</a> 
+</div>
+<hr/>
+ <a href="../"><img src="../images/unFlag.png" style="width:40px"/> Mehr erfahren</a> 
+<!-- <center>
+    <img style ="width:75px;" src="../images/stanford.png"/> 
+    </center> -->
+</div><!-- content --><div class="bookContent" style="display: flex;"><!-- right gutter --><div style="flex-grow:1;max-width:50px;"></div><!-- main stuff --><div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px"><div class="row"><div class="col-md-12 col-xs-12">
+
+<h1> Kapitel 6: While-Schleifen </h1><hr/><p> Die Technik des Definierens neuer Methoden und des Definierens von Schleifen - so nützlich sie auch sind - versetzt Karel nicht in die Lage, neue Probleme zu lösen. Jedes Mal, wenn Sie ein Programm ausführen, macht es immer dasselbe. Programme werden viel nützlicher, wenn sie auf unterschiedliche Eingaben unterschiedlich reagieren können. </p><p> Als Beispiel. Angenommen, Sie wollten ein Programm schreiben, damit Karel an die Wand geht. Sie möchten jedoch nicht, dass dieses Programm auf einer Welt mit fester Größe arbeitet. Sie möchten ein einzelnes Programm schreiben, das auf jeder Welt funktionieren könnte. </p>
+
+
+
+<div class="section embeddedIde" id="moveToWall"><div class="ide getStarted" id="moveToWallIde" style="height:352.0px"><div class="ideCenter" id="moveToWallIdeCenter"><div class="ideEditorDiv" id="moveToWallEditorDiv" style="width:200px"></div><div class="ideCanvasDiv" id="moveToWallCanvasDiv"><div class="worldDropdown"><div class="dropdown"><button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">Ändern Sie die Welt <span class="caret"></span></button><ul aria-labelledby="dropdownMenu1" class="dropdown-menu" id="moveToWallWorlds"><li><a>1x1</a></li><li><a>4x4</a></li><li><a>3x6</a></li><li><a>7x7</a></li><li><a>8x8</a></li></ul></div></div><canvas class="ideCanvas" id="moveToWallCanvas"></canvas></div></div></div><div style="width:100%;"><div class="buttonBar"><button class="btn btn-default" id="moveToWallRunButton"><span class="glyphicon glyphicon-play"></span> Programm ausführen</button></div></div><script>
+
+        
+
+function examplemoveToWall() {
+STARTER_CODE = `
+
+/*
+ * Datei: MoveAnDieWand.java
+ * ------------------------
+ * Verwendet eine "while" -Schleife für move Karel, b
+ * is es gegen eine Wand stößt. Funktioniert auf jede
+ * r Weltgröße.
+ */
+import stanford.karel.*;
+public class MoveAnDieWand extends Karel {
+   public void run() {
+      moveAnDieWand();
+   }
+
+   /* Dies ist eine sehr nützliche Methode */
+   private void moveAnDieWand() {
+      while(frontIsClear()) {
+         move();
+      }
+   } 
+}
+`
+// because of that extra endline at the start of the string
+STARTER_CODE = STARTER_CODE.trim();
+
+ var karelIde = null;
+ var karelEditor = null;
+ var buttonState = 'play';
+
+ function main() {
+   karelEditor = importEditorCode('moveToWallEditor','moveToWallEditorDiv', STARTER_CODE, false);
+    setupWorldDropdown();
+    
+    
+    var canvas = document.getElementById('moveToWallCanvas');
+    karelIde = KarelIde(karelEditor, canvas, '7x7', 0.0);
+    $('#moveToWallRunButton').click(function(){playClicked()});
+    onresize();
+    
+ }
+
+ function setupWorldDropdown() {
+    console.log('setup world dropdown')
+    let ul = document.getElementById('moveToWallWorlds')
+    
+    if (!ul.childNodes || ul.childNodes.length == 0) return;
+
+    // Iterate LIs
+    for (var itemi=0;itemi<ul.childNodes.length;itemi++) {
+        var li = ul.childNodes[itemi];
+        if(li.nodeName == "LI") {
+          var a = li.childNodes[0]
+          let worldName = a.innerHTML;
+          console.log(worldName)
+          a.onclick = () => setWorld(worldName);
+
+        }
+    }
+ }
+
+ function setWorld(worldName){
+    console.log('here we go', worldName)
+    karelIde.changeWorld(worldName)
+    changeToPlayButton()
+ }
+
+ function playClicked() {
+  if(buttonState == 'play') {
+    karelIde.playButton();
+    changeToResetButton();
+   } else if (buttonState == 'reset') {
+    karelIde.stopButton();
+    changeToPlayButton();
+   }
+  }
+
+  function changeToPlayButton() {
+    var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+    $('#moveToWallRunButton').html(playText);
+    buttonState = 'play';
+  }
+
+  function changeToResetButton() {
+    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+    $('#moveToWallRunButton').html(resetText);
+    buttonState = 'reset';  
+  }
+
+ function onresize() { 
+    var parentHeight = 352.0;
+    var canvasWidth = 300
+    var parentWidth = $("#moveToWall").width();
+    console.log('pw: ' + parentWidth);
+
+    var ide = document.getElementById('moveToWallIde');
+    var editorDiv = document.getElementById('moveToWallEditorDiv');
+    var canvas = document.getElementById('moveToWallCanvasDiv');
+    
+    var ideHeight = parentHeight
+    var centerHeight = ideHeight;
+
+    var availibleWidth = parentWidth;
+    var elementSpacing = 12;
+
+    var editorWidth = availibleWidth - canvasWidth - elementSpacing; 
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasWidth + 'px';
+    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+    editorDiv.style.left = 0 + 'px'
+    editorDiv.style.width = editorWidth + 'px';
+    editorDiv.style.height = parentHeight + 'px';
+    console.log('editor width: ' + editorWidth)
+
+    if (karelEditor) {
+       karelEditor.renderer.onResize();
+    }
+ }
+ main()
+ 
+}
+examplemoveToWall();
+    </script></div>
+<p> Versuchen Sie, die Welt zu ändern, indem Sie auf die Dropdown-Liste &quot;Welt ändern&quot; über der Welt klicken. Für jede Welt, in der sich jede Größe befindet, wird sich Karel bewegen, bis er eine Wand trifft. Beachten Sie, dass dieses Kunststück nicht mit einer <code class="keyword">for</code> Schleife abgeschlossen werden kann. Dies erfordert, dass wir die Größe der Welt zum Zeitpunkt der Programmierung kennen. </p><h3> Grundlegende While-Schleife </h3><p> In Karel wird eine <code class="keyword">while</code> Schleife verwendet, um einen Code <i>-</i> Code <i>so lange</i> zu wiederholen, <i>wie</i> eine gegebene Bedingung gilt. Die while-Schleife hat die folgende allgemeine Form: </p><p class="demoCode"><code><span class="keyword">while</span>(</code><i class="demoText">Test</i><code>){</code><br/><i class="demoText" style="margin-left:2em">Aussagen wiederholt werden</i><br/><code>}</code></p><p> Der Kontrollfluß einer while-Schleife ist wie folgt. Wenn das Programm auf eine while-Schleife trifft, beginnt es, einen Prozess zu wiederholen, bei dem zuerst <i>geprüft wird,</i> ob der Test bestanden wurde und wenn dies der <i>Fall ist,</i> der Code im Hauptteil ausgeführt wird. </p> Wenn das Programm <i>prüft,</i> ob der Test erfolgreich ist, entscheidet es, ob der <i class="demoText">Test</i> für den aktuellen Zustand der Welt erfüllt ist. Wenn ja, führt die Schleife den Code im Hauptteil aus. Wenn der Test fehlschlägt, ist die Schleife beendet und das Programm läuft weiter. <p> Wenn das Programm in dem Körper der Schleife <i>läuft,</i> führt das Programm die Zeilen in dem Körper einen nach dem anderen. Wenn das Programm am Ende der while-Schleife ankommt, springt es zurück an den Anfang der Schleife. Anschließend wird der Test erneut geprüft und die Schleife fortgesetzt, wenn er bestanden hat. Das Programm beendet die Schleife erst, wenn es zu einer Prüfung kommt und der Test fehlschlägt. </p><p> Karel hat viele <i class="demoText">Testaussagen</i>, und wir werden alle im nächsten Kapitel durchgehen. Im <code>vorneIstKlar()</code> wir eine einzige <code>vorneIstKlar()</code>: <code>vorneIstKlar()</code> ist der Fall, wenn sich keine Wand direkt vor Karel befindet. </p><h3> Fencepost Bug </h3><p> Lassen Sie uns unser Programm ändern, um es interessanter zu machen. Anstatt nur zu einer Wand zu gehen, muss Karel eine Reihe von Piepsern in jedes Feld einlegen. Wir möchten, dass dieses Programm für eine Welt jeder Größe funktioniert: </p>
+
+
+
+<div class="section embeddedIde" id="beeperLineBug1"><div class="ide getStarted" id="beeperLineBug1Ide" style="height:369.6px"><div class="ideCenter" id="beeperLineBug1IdeCenter"><div class="ideEditorDiv" id="beeperLineBug1EditorDiv" style="width:200px"></div><div class="ideCanvasDiv" id="beeperLineBug1CanvasDiv"><div class="worldDropdown"><div class="dropdown"><button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">Ändern Sie die Welt <span class="caret"></span></button><ul aria-labelledby="dropdownMenu1" class="dropdown-menu" id="beeperLineBug1Worlds"><li><a>1x1</a></li><li><a>4x4</a></li><li><a>3x6</a></li><li><a>7x7</a></li><li><a>8x8</a></li></ul></div></div><canvas class="ideCanvas" id="beeperLineBug1Canvas"></canvas></div></div></div><div style="width:100%;"><div class="buttonBar"><button class="btn btn-default" id="beeperLineBug1RunButton"><span class="glyphicon glyphicon-play"></span> Programm ausführen</button></div></div><script>
+
+        
+
+function examplebeeperLineBug1() {
+STARTER_CODE = `
+
+/*
+ * Datei: Cono.java
+ * ---------------
+ * Verwendet eine while-Schleife, um eine Zeile mit b
+ * eeper s zu platzieren. Dieses Programm funktionier
+ * t für eine Welt jeder Größe. Da jedoch jede Welt w
+ * eniger move s als putBeeper s benötigt, fehlt imme
+ * r eine beeper .
+ */
+import stanford.karel.*;
+public class Cono extends Karel {
+   public void run() {
+   	  /* wiederholt, bis karel vor einer wand steht */
+      while(frontIsClear()) {
+      	 /* Platziere eine beeper auf dem aktuellen Feld */ 
+         putBeeper();
+      	 /* move bis zum nächsten Platz */
+         move();
+      }
+   }
+}
+`
+// because of that extra endline at the start of the string
+STARTER_CODE = STARTER_CODE.trim();
+
+ var karelIde = null;
+ var karelEditor = null;
+ var buttonState = 'play';
+
+ function main() {
+   karelEditor = importEditorCode('beeperLineBug1Editor','beeperLineBug1EditorDiv', STARTER_CODE, true);
+    setupWorldDropdown();
+    
+    
+    var canvas = document.getElementById('beeperLineBug1Canvas');
+    karelIde = KarelIde(karelEditor, canvas, '7x7', 0.0);
+    $('#beeperLineBug1RunButton').click(function(){playClicked()});
+    onresize();
+    
+ }
+
+ function setupWorldDropdown() {
+    console.log('setup world dropdown')
+    let ul = document.getElementById('beeperLineBug1Worlds')
+    
+    if (!ul.childNodes || ul.childNodes.length == 0) return;
+
+    // Iterate LIs
+    for (var itemi=0;itemi<ul.childNodes.length;itemi++) {
+        var li = ul.childNodes[itemi];
+        if(li.nodeName == "LI") {
+          var a = li.childNodes[0]
+          let worldName = a.innerHTML;
+          console.log(worldName)
+          a.onclick = () => setWorld(worldName);
+
+        }
+    }
+ }
+
+ function setWorld(worldName){
+    console.log('here we go', worldName)
+    karelIde.changeWorld(worldName)
+    changeToPlayButton()
+ }
+
+ function playClicked() {
+  if(buttonState == 'play') {
+    karelIde.playButton();
+    changeToResetButton();
+   } else if (buttonState == 'reset') {
+    karelIde.stopButton();
+    changeToPlayButton();
+   }
+  }
+
+  function changeToPlayButton() {
+    var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+    $('#beeperLineBug1RunButton').html(playText);
+    buttonState = 'play';
+  }
+
+  function changeToResetButton() {
+    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+    $('#beeperLineBug1RunButton').html(resetText);
+    buttonState = 'reset';  
+  }
+
+ function onresize() { 
+    var parentHeight = 369.6;
+    var canvasWidth = 300
+    var parentWidth = $("#beeperLineBug1").width();
+    console.log('pw: ' + parentWidth);
+
+    var ide = document.getElementById('beeperLineBug1Ide');
+    var editorDiv = document.getElementById('beeperLineBug1EditorDiv');
+    var canvas = document.getElementById('beeperLineBug1CanvasDiv');
+    
+    var ideHeight = parentHeight
+    var centerHeight = ideHeight;
+
+    var availibleWidth = parentWidth;
+    var elementSpacing = 12;
+
+    var editorWidth = availibleWidth - canvasWidth - elementSpacing; 
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasWidth + 'px';
+    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+    editorDiv.style.left = 0 + 'px'
+    editorDiv.style.width = editorWidth + 'px';
+    editorDiv.style.height = parentHeight + 'px';
+    console.log('editor width: ' + editorWidth)
+
+    if (karelEditor) {
+       karelEditor.renderer.onResize();
+    }
+ }
+ main()
+ 
+}
+examplebeeperLineBug1();
+    </script></div>
+<p> Das sieht gut aus. Bis auf ein Problem. Auf jeder Welt setzt Karel keinen Piepser auf das letzte Quadrat der Linie (genau hinschauen). Wenn sich Karel auf dem letzten Feld befindet, führt das Programm den Körper der Schleife nicht aus, da der Test nicht mehr besteht - Karel steht vor einer Wand. Sie könnten versucht sein, die Reihenfolge des Körpers so zu ändern, dass sich Karel bewegt, bevor Sie ein Bier setzen. Der Code ist editierbar, also probiere es aus! </p><p> Es gibt ein tieferes Problem, das keine Umlagerung des Körpers lösen kann. Für die Welt mit 7 Säulen muss Karel 7 Piepser setzen, sollte sich jedoch nur 6-mal bewegen. Wie können Sie das Programm veranlassen, einen Befehl einmal mehr als den anderen auszuführen, da die while-Schleife beide Zeilen ausführt, wenn ein Test durchläuft? </p><p> Der Fehler in diesem Programm ist ein Beispiel für ein Programmierproblem, das als <b>Zaunpfahlfehler bezeichnet wird</b>. Der Name rührt von der Tatsache her, dass, wenn Sie einen Zaun aus Paneelen mit einem Zaunpfosten auf einer der beiden Größen bauen möchten, die Anzahl der Zaunpfosten immer um eine Zahl größer ist als die Anzahl der Paneele. Wie viele Zaunpfosten benötigen Sie zum Beispiel, um einen Zaun mit 10 Paneelen zu bauen? Die Antwort lautet 11, wie das folgende Diagramm veranschaulicht: </p><center><img src="../images/ch6/fencepost.png" style="width:500px;margin-bottom:10px"/></center><p> Wenn Sie diesen Fehler entdeckt haben, ist das Beheben dieses Fehlers eigentlich ganz einfach. Bevor Karel am Ende der Welt aufhört, muss das Programm nur noch einen letzten Piepser platzieren: </p>
+
+
+
+<div class="section embeddedIde" id="beeperLine"><div class="ide getStarted" id="beeperLineIde" style="height:369.6px"><div class="ideCenter" id="beeperLineIdeCenter"><div class="ideEditorDiv" id="beeperLineEditorDiv" style="width:200px"></div><div class="ideCanvasDiv" id="beeperLineCanvasDiv"><div class="worldDropdown"><div class="dropdown"><button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">Ändern Sie die Welt <span class="caret"></span></button><ul aria-labelledby="dropdownMenu1" class="dropdown-menu" id="beeperLineWorlds"><li><a>1x1</a></li><li><a>4x4</a></li><li><a>3x6</a></li><li><a>7x7</a></li><li><a>8x8</a></li></ul></div></div><canvas class="ideCanvas" id="beeperLineCanvas"></canvas></div></div></div><div style="width:100%;"><div class="buttonBar"><button class="btn btn-default" id="beeperLineRunButton"><span class="glyphicon glyphicon-play"></span> Programm ausführen</button></div></div><script>
+
+        
+
+function examplebeeperLine() {
+STARTER_CODE = `
+
+/*
+ * Datei: ConoLinie.java
+ * --------------------
+ * Verwendet eine "while" -Schleife, um eine Zeile mi
+ * t beeper s zu platzieren. Dieses Programm funktion
+ * iert für eine Welt jeder Größe.
+ */
+import stanford.karel.*;
+public class ConoLinie extends Karel {
+   public void run() {
+      /* wiederholt, bis karel vor einer wand steht */
+      while(frontIsClear()) {
+         /* Platziere eine beeper auf dem aktuellen Feld */ 
+         putBeeper();
+         /* move bis zum nächsten Platz */
+         move();
+      }
+      /* behebt den Zaunpfosten-Bug */
+      putBeeper();
+   }
+}
+`
+// because of that extra endline at the start of the string
+STARTER_CODE = STARTER_CODE.trim();
+
+ var karelIde = null;
+ var karelEditor = null;
+ var buttonState = 'play';
+
+ function main() {
+   karelEditor = importEditorCode('beeperLineEditor','beeperLineEditorDiv', STARTER_CODE, true);
+    setupWorldDropdown();
+    
+    
+    var canvas = document.getElementById('beeperLineCanvas');
+    karelIde = KarelIde(karelEditor, canvas, '7x7', 0.8);
+    $('#beeperLineRunButton').click(function(){playClicked()});
+    onresize();
+    
+ }
+
+ function setupWorldDropdown() {
+    console.log('setup world dropdown')
+    let ul = document.getElementById('beeperLineWorlds')
+    
+    if (!ul.childNodes || ul.childNodes.length == 0) return;
+
+    // Iterate LIs
+    for (var itemi=0;itemi<ul.childNodes.length;itemi++) {
+        var li = ul.childNodes[itemi];
+        if(li.nodeName == "LI") {
+          var a = li.childNodes[0]
+          let worldName = a.innerHTML;
+          console.log(worldName)
+          a.onclick = () => setWorld(worldName);
+
+        }
+    }
+ }
+
+ function setWorld(worldName){
+    console.log('here we go', worldName)
+    karelIde.changeWorld(worldName)
+    changeToPlayButton()
+ }
+
+ function playClicked() {
+  if(buttonState == 'play') {
+    karelIde.playButton();
+    changeToResetButton();
+   } else if (buttonState == 'reset') {
+    karelIde.stopButton();
+    changeToPlayButton();
+   }
+  }
+
+  function changeToPlayButton() {
+    var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+    $('#beeperLineRunButton').html(playText);
+    buttonState = 'play';
+  }
+
+  function changeToResetButton() {
+    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+    $('#beeperLineRunButton').html(resetText);
+    buttonState = 'reset';  
+  }
+
+ function onresize() { 
+    var parentHeight = 369.6;
+    var canvasWidth = 300
+    var parentWidth = $("#beeperLine").width();
+    console.log('pw: ' + parentWidth);
+
+    var ide = document.getElementById('beeperLineIde');
+    var editorDiv = document.getElementById('beeperLineEditorDiv');
+    var canvas = document.getElementById('beeperLineCanvasDiv');
+    
+    var ideHeight = parentHeight
+    var centerHeight = ideHeight;
+
+    var availibleWidth = parentWidth;
+    var elementSpacing = 12;
+
+    var editorWidth = availibleWidth - canvasWidth - elementSpacing; 
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasWidth + 'px';
+    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+    editorDiv.style.left = 0 + 'px'
+    editorDiv.style.width = editorWidth + 'px';
+    editorDiv.style.height = parentHeight + 'px';
+    console.log('editor width: ' + editorWidth)
+
+    if (karelEditor) {
+       karelEditor.renderer.onResize();
+    }
+ }
+ main()
+ 
+}
+examplebeeperLine();
+    </script></div><hr/><center><a class="btn btn-primary btn-lg" href="chapter7.html" role="button">Nächstes Kapitel</a></center>
+
+
+
+<div style="height:60px"></div>
+<!-- <div class="footer">
+	<p class="pull-left">
+		&#169; Stanford 2018 &#124; Made by Chris Piech. Built off "Karel the Robot Learns Java" by Eric Roberts. 
+	</p>
+</div>-->
+<!-- <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74362126-1', 'auto');
+  ga('send', 'pageview');
+
+</script>--></div></div></div><!-- right gutter --><div style="flex-grow:4"></div></div></div></body></html>

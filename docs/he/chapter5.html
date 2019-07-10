@@ -1,0 +1,376 @@
+<html><head>
+<title> קארל רידר </title><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><script src="../plugins/jquery.min.js"></script><link href="../plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/><script src="../plugins/bootstrap/js/bootstrap.min.js"></script><link href="../style.css" rel="stylesheet"/><script src="..//karel/js/html/websiteImports.js"></script><script>importCss();</script><script>importJs();</script></head><body style=";text-align:right;direction:rtl"><!-- container --><div class="bookContainer" style=";text-align:right;direction:rtl">
+<!-- side bar --><div class="bookSideBar" style=";text-align:right;direction:rtl"><div class="homeLink" style=";text-align:right;direction:rtl"><a href="http://cs106a.stanford.edu"><span aria-hidden="true" class="glyphicon glyphicon-home"></span> CS106A</a></div><hr/><div class="sideBarTitle" style=";text-align:right;direction:rtl"><a href="../he/intro.html" style="color:black">קארל רידר</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter1.html">1 - פגוש את קארל</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter2.html">2 - תכנות</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter3.html">שיטות חדשות</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter4.html">4 - פירוק</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter5.html">5 - לולאות</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter6.html">6 - בעוד לולאות</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter7.html">7 - תנאים</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter8.html">8 - צמצום</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter9.html">9 - אלגוריתמים</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter10.html">10 - SuperKarel</a></div><!-- <center>
+    <img style ="width:75px;" src="../images/stanford.png"/>
+    </center>--></div><!-- content --><div class="bookContent" style="display: flex;;text-align:right;direction:rtl"><!-- right gutter --><div style="flex-grow:1;max-width:50px;;text-align:right;direction:rtl"></div><!-- main stuff --><div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px;text-align:right;direction:rtl"><div class="row" style=";text-align:right;direction:rtl"><div class="col-md-12 col-xs-12" style=";text-align:right;direction:rtl">
+
+<h1 style=";text-align:right;direction:rtl"> פרק 5: לולאות </h1><hr/><p style=";text-align:right;direction:rtl"> אחד הדברים במחשבים טובים במיוחד הוא חזרה. כיצד נוכל לשכנע את קארל לבצע מספר רב של פעמים? כדי לראות כיצד ניתן להשתמש בחזרות, שקול את המשימה של הצבת 42 צפצופים: </p>
+
+
+
+<div class="section" id="ba" style=";text-align:right;direction:rtl"><div class="ide getStarted" id="baIde" style=";text-align:right;direction:rtl"><div class="commandCanvasDiv" id="baCanvasDiv" style=";text-align:right;direction:rtl"><div style=";text-align:right;direction:rtl"><div class="commandCanvasTitle" style=";text-align:right;direction:rtl"> לפני: </div><div class="commandCanvasOuter" style=";text-align:right;direction:rtl"><canvas id="baCanvasBefore" style="width:200px;"></canvas></div></div><div style="width:50px;text-align:right;direction:rtl"></div><div style=";text-align:right;direction:rtl"><div class="commandCanvasTitle" style=";text-align:right;direction:rtl"> לאחר: </div><div class="commandCanvasOuter" style=";text-align:right;direction:rtl"><canvas id="baCanvasAfter" style="width:200px;"></canvas></div></div></div></div><script>
+
+        
+
+function exampleba() {
+ var karelIde = null;
+ var buttonState = 'play';
+ var canvas = null;
+
+ function main() {
+    canvas = document.getElementById('baCanvasBefore');
+    karelIde = KarelIde(null, canvas, '99beepersStart', 0.0, 1000, 1.0 * 1000);
+
+    let canvasGoal = document.getElementById('baCanvasAfter');
+    let goalIde = KarelIde(null, canvasGoal, '99beepersGoal',0.0,  1000, 1.0 * 1000)
+ }
+
+ 
+ main()
+ 
+}
+exampleba();
+    </script></div>
+<h3 style=";text-align:right;direction:rtl"> בסיסי לולאה </h3><p style=";text-align:right;direction:rtl"> מכיוון שאתה יודע שיש בדיוק 42 צפצופים למקום, את הצהרת השליטה שאתה צריך הוא <b>לולאה</b>, אשר מציין כי אתה רוצה לחזור על פעולה כלשהי מספר קבוע של פעמים. מבנה ההצהרה נראה מסובך בעיקר משום שהוא למעשה הרבה יותר חזק מכל מה שקארל זקוק לו. הגרסה היחידה של התחביר שבו משתמש קארל היא: </p><p class="demoCode" style=";text-align:right;direction:rtl"><code>for(int i = 0; i &lt;</code><i class="demoText">count</i><code>; i++){</code><br/><i style="margin-left:2em">הצהרות שיש לחזור עליהן</i><br/><code>}</code></p><p class="mb-20" style=";text-align:right;direction:rtl"> נעבור על כל הפרטים של לולאה מאוחר יותר בכיתה. לעת עתה אתה צריך לקרוא את השורה הזאת כדרך להביע, &quot;חזור על ההצהרות בין סוגריים מסולסלים <i class="demoText">לספור</i> פעמים.&quot; אנו יכולים להשתמש <b>בלולאה</b> חדשה זו כדי למקם 42 ביפרים על ידי החלפת <i class="demoText">הספירה ב</i>-42 ולהכניס את <code>שיםאתביפר()</code> בתוך הבלוק של קוד הלולאה. אנו קוראים פקודות בקוד לחסום את <b>הגוף</b>: </p><p style=";text-align:right;direction:rtl">
+
+
+<div class="section embeddedIde" id="99beepers" style=";text-align:right;direction:rtl"><div class="ide getStarted" id="99beepersIde" style="height:281.6px;text-align:right;direction:rtl"><div class="ideCenter" id="99beepersIdeCenter" style=";text-align:right;direction:rtl"><div class="ideEditorDiv" id="99beepersEditorDiv" style="width:200px;text-align:right;direction:rtl"></div><div class="ideCanvasDiv" id="99beepersCanvasDiv" style=";text-align:right;direction:rtl"><canvas class="ideCanvas" id="99beepersCanvas"></canvas></div></div></div><div style="width:100%;;text-align:right;direction:rtl"><div class="buttonBar" style=";text-align:right;direction:rtl"><button class="btn btn-default" id="99beepersRunButton"><span class="glyphicon glyphicon-play"></span> הפעל תוכנית</button></div></div><script>
+
+        
+
+function example99beepers() {
+STARTER_CODE = `
+
+/*
+ * קובץ: מקוםמציציםרבים
+ * --------------------
+ * מקומות 42 ביפר באמצעות לולאה
+ */
+import סטנפורד.קאראל.*;
+public class מקוםמציציםרבים extends קארל {
+   public void run() {
+      מהלך_\_לזוז_\_לעבור();
+      /* לחזור שיםאתביפר פעמים רבות */
+      for(int i = 0; i < 42; i++) {
+      	שיםאתביפר();
+      }
+      מהלך_\_לזוז_\_לעבור();
+   } 
+}
+`
+// because of that extra endline at the start of the string
+STARTER_CODE = STARTER_CODE.trim();
+
+ var karelIde = null;
+ var karelEditor = null;
+ var buttonState = 'play';
+
+ function main() {
+   karelEditor = importEditorCode('99beepersEditor','99beepersEditorDiv', STARTER_CODE, true);
+     //importRunButtonBar('example1ButtonBar');
+    
+    $("[title]").tooltip({ position: "bottom center", opacity: 0.9});
+    
+    initTabs();
+    var canvas = document.getElementById('99beepersCanvas');
+    karelIde = KarelIde(karelEditor, canvas, '99beepersStart', 0.8);
+    $('#99beepersRunButton').click(function(){playClicked()});
+    onresize();
+    
+ }
+
+ function playClicked() {
+  if(buttonState == 'play') {
+    karelIde.playButton();
+      
+      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+      $('#99beepersRunButton').html(resetText);
+      buttonState = 'reset';
+     } else if (buttonState == 'reset') {
+      karelIde.stopButton();
+      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+      $('#99beepersRunButton').html(playText);
+      buttonState = 'play';
+     }
+  
+  }
+
+ function onresize() { 
+    var parentHeight = 281.6;
+    var canvasWidth = 200
+    var parentWidth = $("#99beepers").width();
+    console.log('pw: ' + parentWidth);
+
+    var ide = document.getElementById('99beepersIde');
+    var editorDiv = document.getElementById('99beepersEditorDiv');
+    var canvas = document.getElementById('99beepersCanvasDiv');
+    
+    var ideHeight = parentHeight
+    var centerHeight = ideHeight;
+
+    var availibleWidth = parentWidth;
+    var elementSpacing = 12;
+
+    var editorWidth = availibleWidth - canvasWidth - elementSpacing; 
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasWidth + 'px';
+    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+    editorDiv.style.left = 0 + 'px'
+    editorDiv.style.width = editorWidth + 'px';
+    editorDiv.style.height = parentHeight + 'px';
+    console.log('editor width: ' + editorWidth)
+
+    if (karelEditor) {
+       karelEditor.renderer.onResize();
+    }
+ }
+ main()
+ 
+}
+example99beepers();
+    </script></div><p style=";text-align:right;direction:rtl"> הקוד לעיל ניתן לעריכה. נסו לשנות אותו כך שהוא ימקם רק 15 צפצופים. </p><h3 style=";text-align:right;direction:rtl"> התמודדות עם תנאים מוקדמים </h3><p style=";text-align:right;direction:rtl"> הדוגמה הקודמת נותנת את הרושם כי לולאה חוזרת על שורה אחת של קוד. עם זאת את הגוף של לולאה עבור (הצהרות כי חוזרים חוזרים) יכול להיות מספר שורות. הנה דוגמה לתוכנית שמציבה ביפר בכל פינה בעולם: </p>
+
+
+
+<div class="section embeddedIde" id="cornerBeepers" style=";text-align:right;direction:rtl"><div class="ide getStarted" id="cornerBeepersIde" style="height:316.8px;text-align:right;direction:rtl"><div class="ideCenter" id="cornerBeepersIdeCenter" style=";text-align:right;direction:rtl"><div class="ideEditorDiv" id="cornerBeepersEditorDiv" style="width:200px;text-align:right;direction:rtl"></div><div class="ideCanvasDiv" id="cornerBeepersCanvasDiv" style=";text-align:right;direction:rtl"><canvas class="ideCanvas" id="cornerBeepersCanvas"></canvas></div></div></div><div style="width:100%;;text-align:right;direction:rtl"><div class="buttonBar" style=";text-align:right;direction:rtl"><button class="btn btn-default" id="cornerBeepersRunButton"><span class="glyphicon glyphicon-play"></span> הפעל תוכנית</button></div></div><script>
+
+        
+
+function examplecornerBeepers() {
+STARTER_CODE = `
+
+/*
+ * קובץ: ציפוריפינה
+ * ----------------
+ * במקום אחד יש ביפר בכל פינה
+ */
+import סטנפורד.קאראל.*;
+public class ציפוריפינה extends קארל {
+   public void run() {
+      /* לחזור על הגוף 4 פעמים */
+      for(int i = 0; i < 4; i++) {
+      	שיםאתביפר();
+      	מהלך_\_לזוז_\_לעבור();
+      	מהלך_\_לזוז_\_לעבור();
+      	מהלך_\_לזוז_\_לעבור();
+      	פונהשמאלה();
+      }
+   } 
+}
+`
+// because of that extra endline at the start of the string
+STARTER_CODE = STARTER_CODE.trim();
+
+ var karelIde = null;
+ var karelEditor = null;
+ var buttonState = 'play';
+
+ function main() {
+   karelEditor = importEditorCode('cornerBeepersEditor','cornerBeepersEditorDiv', STARTER_CODE, true);
+     //importRunButtonBar('example1ButtonBar');
+    
+    $("[title]").tooltip({ position: "bottom center", opacity: 0.9});
+    
+    initTabs();
+    var canvas = document.getElementById('cornerBeepersCanvas');
+    karelIde = KarelIde(karelEditor, canvas, 'cornerBeepersStart', 0.0);
+    $('#cornerBeepersRunButton').click(function(){playClicked()});
+    onresize();
+    
+ }
+
+ function playClicked() {
+  if(buttonState == 'play') {
+    karelIde.playButton();
+      
+      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+      $('#cornerBeepersRunButton').html(resetText);
+      buttonState = 'reset';
+     } else if (buttonState == 'reset') {
+      karelIde.stopButton();
+      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+      $('#cornerBeepersRunButton').html(playText);
+      buttonState = 'play';
+     }
+  
+  }
+
+ function onresize() { 
+    var parentHeight = 316.8;
+    var canvasWidth = 200
+    var parentWidth = $("#cornerBeepers").width();
+    console.log('pw: ' + parentWidth);
+
+    var ide = document.getElementById('cornerBeepersIde');
+    var editorDiv = document.getElementById('cornerBeepersEditorDiv');
+    var canvas = document.getElementById('cornerBeepersCanvasDiv');
+    
+    var ideHeight = parentHeight
+    var centerHeight = ideHeight;
+
+    var availibleWidth = parentWidth;
+    var elementSpacing = 12;
+
+    var editorWidth = availibleWidth - canvasWidth - elementSpacing; 
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasWidth + 'px';
+    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+    editorDiv.style.left = 0 + 'px'
+    editorDiv.style.width = editorWidth + 'px';
+    editorDiv.style.height = parentHeight + 'px';
+    console.log('editor width: ' + editorWidth)
+
+    if (karelEditor) {
+       karelEditor.renderer.onResize();
+    }
+ }
+ main()
+ 
+}
+examplecornerBeepers();
+    </script></div>
+<p style=";text-align:right;direction:rtl"> שים לב קרוב מאוד לאופן שבו התוכנית זורמת באמצעות הצהרות בקרה אלה. התוכנית פועלת דרך מערכת של פקודות בגוף לולאה אחת בכל פעם. זה חוזר על הגוף ארבע פעמים. </p><p style=";text-align:right;direction:rtl"> אולי החלק המסובך ביותר של כתיבת לולאה הוא שאתה צריך את המדינה של העולם בסוף הלולאה ( <b>postcondition</b>) להיות מצב חוקי של העולם לתחילת הלולאה ( <b>תנאי מוקדם</b>). בדוגמה שלעיל ההנחות תואמות. זמנים טובים. בתחילת הלולאה, קארל תמיד על כיכר ללא צפצופים מול הפינה הריקה הבאה. מה אם מחקת את הפונהשמאלה בסוף הלולאה? התנאי שבסוף האיטרציה הראשונה לא יספק עוד את ההנחות לגבי קארל מול הפינה הריקה הבאה. הקוד ניתן לעריכה. נסה למחוק את <code>פונהשמאלה();</code> הפקודה לראות מה קורה! </p><h3 style=";text-align:right;direction:rtl"> לולאות מקוננות </h3><p style=";text-align:right;direction:rtl"> מבחינה טכנית הגוף של לולאה יכול להכיל כל קוד זרימת שליטה, אפילו לולאות אחרות. הנה דוגמה של לולאה שחוזרת על קריאה לשיטה שיש לה גם לולאה. אנו קוראים לזה לולאה &quot;מקוננת&quot;. נסה לקרוא את התוכנית, ולהבין מה היא עושה, לפני הפעלתה: 
+
+
+
+<div class="section embeddedIde" id="cornerBeepers10" style=";text-align:right;direction:rtl"><div class="ide getStarted" id="cornerBeepers10Ide" style="height:545.6px;text-align:right;direction:rtl"><div class="ideCenter" id="cornerBeepers10IdeCenter" style=";text-align:right;direction:rtl"><div class="ideEditorDiv" id="cornerBeepers10EditorDiv" style="width:200px;text-align:right;direction:rtl"></div><div class="ideCanvasDiv" id="cornerBeepers10CanvasDiv" style=";text-align:right;direction:rtl"><canvas class="ideCanvas" id="cornerBeepers10Canvas"></canvas></div></div></div><div style="width:100%;;text-align:right;direction:rtl"><div class="buttonBar" style=";text-align:right;direction:rtl"><button class="btn btn-default" id="cornerBeepers10RunButton"><span class="glyphicon glyphicon-play"></span> הפעל תוכנית</button></div></div><script>
+
+        
+
+function examplecornerBeepers10() {
+STARTER_CODE = `
+
+/*
+ * קובץ: חמשפינות
+ * --------------
+ * במקום חמישה צפצופים בכל פינה
+ */
+import סטנפורד.קאראל.*;
+public class חמשפינות extends קארל {
+
+   public void run() {
+      /* חזור פעם אחת לכל פינה */
+      for(int i = 0; i < 4; i++) {
+         לשיםחמישהצפצופים();
+         מעברלפינההבאה();
+      }
+   } 
+
+   /* למקם מחדש קאראל לפינה הבאה */
+   public void מעברלפינההבאה() {
+      מהלך_\_לזוז_\_לעבור();
+      מהלך_\_לזוז_\_לעבור();
+      מהלך_\_לזוז_\_לעבור();
+      פונהשמאלה();
+   }
+
+   /* מקומות 5 צפצופים באמצעות לולאה */
+   public void לשיםחמישהצפצופים() {
+      for(int i = 0; i < 5; i++) {
+      	שיםאתביפר();
+      }
+   }
+}
+`
+// because of that extra endline at the start of the string
+STARTER_CODE = STARTER_CODE.trim();
+
+ var karelIde = null;
+ var karelEditor = null;
+ var buttonState = 'play';
+
+ function main() {
+   karelEditor = importEditorCode('cornerBeepers10Editor','cornerBeepers10EditorDiv', STARTER_CODE, false);
+     //importRunButtonBar('example1ButtonBar');
+    
+    $("[title]").tooltip({ position: "bottom center", opacity: 0.9});
+    
+    initTabs();
+    var canvas = document.getElementById('cornerBeepers10Canvas');
+    karelIde = KarelIde(karelEditor, canvas, 'cornerBeepersStart', 0.7);
+    $('#cornerBeepers10RunButton').click(function(){playClicked()});
+    onresize();
+    
+ }
+
+ function playClicked() {
+  if(buttonState == 'play') {
+    karelIde.playButton();
+      
+      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+      $('#cornerBeepers10RunButton').html(resetText);
+      buttonState = 'reset';
+     } else if (buttonState == 'reset') {
+      karelIde.stopButton();
+      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+      $('#cornerBeepers10RunButton').html(playText);
+      buttonState = 'play';
+     }
+  
+  }
+
+ function onresize() { 
+    var parentHeight = 545.6;
+    var canvasWidth = 200
+    var parentWidth = $("#cornerBeepers10").width();
+    console.log('pw: ' + parentWidth);
+
+    var ide = document.getElementById('cornerBeepers10Ide');
+    var editorDiv = document.getElementById('cornerBeepers10EditorDiv');
+    var canvas = document.getElementById('cornerBeepers10CanvasDiv');
+    
+    var ideHeight = parentHeight
+    var centerHeight = ideHeight;
+
+    var availibleWidth = parentWidth;
+    var elementSpacing = 12;
+
+    var editorWidth = availibleWidth - canvasWidth - elementSpacing; 
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasWidth + 'px';
+    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+    editorDiv.style.left = 0 + 'px'
+    editorDiv.style.width = editorWidth + 'px';
+    editorDiv.style.height = parentHeight + 'px';
+    console.log('editor width: ' + editorWidth)
+
+    if (karelEditor) {
+       karelEditor.renderer.onResize();
+    }
+ }
+ main()
+ 
+}
+examplecornerBeepers10();
+    </script></div></p></p><hr/><center style=";text-align:right;direction:rtl"><a class="btn btn-primary btn-lg" href="chapter6.html" role="button">פרק הבא</a></center>
+
+
+
+<div style="height:60px;text-align:right;direction:rtl"></div>
+<!-- <div class="footer">
+	<p class="pull-left">
+		&#169; Stanford 2018 &#124; Made by Chris Piech. Built off "Karel the Robot Learns Java" by Eric Roberts. 
+	</p>
+</div>-->
+<!-- <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74362126-1', 'auto');
+  ga('send', 'pageview');
+
+</script>--></div></div></div><!-- right gutter --><div style="flex-grow:4;text-align:right;direction:rtl"></div></div></div></body></html>

@@ -1,0 +1,376 @@
+<html><head>
+<title> Leitor Karel </title><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><script src="../plugins/jquery.min.js"></script><link href="../plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/><script src="../plugins/bootstrap/js/bootstrap.min.js"></script><link href="../style.css" rel="stylesheet"/><script src="..//karel/js/html/websiteImports.js"></script><script>importCss();</script><script>importJs();</script></head><body><!-- container --><div class="bookContainer">
+<!-- side bar --><div class="bookSideBar"><div class="homeLink"><a href="http://cs106a.stanford.edu"><span aria-hidden="true" class="glyphicon glyphicon-home"></span> CS106A</a></div><hr/><div class="sideBarTitle"><a href="../pt/intro.html" style="color:black">Leitor Karel</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../pt/chapter1.html">1 - Conheça Karel</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../pt/chapter2.html">2 - Programação</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../pt/chapter3.html">3 - Novos Métodos</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../pt/chapter4.html">4 - Decomposição</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../pt/chapter5.html">5 - For Loops</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../pt/chapter6.html">6 - While Loops</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../pt/chapter7.html">7 - Condicionais</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../pt/chapter8.html">8 - Refinamento</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../pt/chapter9.html">9 - Algoritmos</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../pt/chapter10.html">10 - SuperKarel</a></div><!-- <center>
+    <img style ="width:75px;" src="../images/stanford.png"/>
+    </center>--></div><!-- content --><div class="bookContent" style="display: flex;"><!-- right gutter --><div style="flex-grow:1;max-width:50px;"></div><!-- main stuff --><div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px"><div class="row"><div class="col-md-12 col-xs-12">
+
+<h1> Capítulo 5: For Loops </h1><hr/><p> Uma das coisas em que os computadores são especialmente bons é a repetição. Como podemos convencer Karel a executar um bloco de código várias vezes? Para ver como a repetição pode ser usada, considere a tarefa de colocar 42 sinais sonoros: </p>
+
+
+
+<div class="section" id="ba"><div class="ide getStarted" id="baIde"><div class="commandCanvasDiv" id="baCanvasDiv"><div><div class="commandCanvasTitle"> Antes: </div><div class="commandCanvasOuter"><canvas id="baCanvasBefore" style="width:200px;"></canvas></div></div><div style="width:50px"></div><div><div class="commandCanvasTitle"> Depois de: </div><div class="commandCanvasOuter"><canvas id="baCanvasAfter" style="width:200px;"></canvas></div></div></div></div><script>
+
+        
+
+function exampleba() {
+ var karelIde = null;
+ var buttonState = 'play';
+ var canvas = null;
+
+ function main() {
+    canvas = document.getElementById('baCanvasBefore');
+    karelIde = KarelIde(null, canvas, '99beepersStart', 0.0, 1000, 1.0 * 1000);
+
+    let canvasGoal = document.getElementById('baCanvasAfter');
+    let goalIde = KarelIde(null, canvasGoal, '99beepersGoal',0.0,  1000, 1.0 * 1000)
+ }
+
+ 
+ main()
+ 
+}
+exampleba();
+    </script></div>
+<h3> Basic For Loop </h3><p> Como você sabe que existem exatamente 42 sinais sonoros para colocar, a instrução de controle necessária é um <b>loop for</b>, que especifica que você deseja repetir algumas operações por um número fixo de vezes. A estrutura da declaração for parece complicada principalmente porque é realmente muito mais poderosa do que qualquer coisa que Karel precisa. A única versão da sintaxe for que Karel usa é: </p><p class="demoCode"><code>for(int i = 0; i &lt;</code><i class="demoText">contagem</i><code>; i++){</code><br/><i style="margin-left:2em">declarações a serem repetidas</i><br/><code>}</code></p><p class="mb-20"> Analisaremos todos os detalhes do loop for mais adiante na classe. Por enquanto você deve ler esta linha como uma maneira de expressar, &quot;repita as declarações entre os tempos de <i class="demoText">contagem das</i> chaves.&quot; Podemos usar este novo <b>loop</b> para colocar 42 <code>colocarBeeper()</code> substituindo a <i class="demoText">contagem</i> por 42 e colocando o comando <code>colocarBeeper()</code> dentro do bloco de código for loop. Nós chamamos comandos no bloco de código do <b>corpo</b>: </p><p>
+
+
+<div class="section embeddedIde" id="99beepers"><div class="ide getStarted" id="99beepersIde" style="height:281.6px"><div class="ideCenter" id="99beepersIdeCenter"><div class="ideEditorDiv" id="99beepersEditorDiv" style="width:200px"></div><div class="ideCanvasDiv" id="99beepersCanvasDiv"><canvas class="ideCanvas" id="99beepersCanvas"></canvas></div></div></div><div style="width:100%;"><div class="buttonBar"><button class="btn btn-default" id="99beepersRunButton"><span class="glyphicon glyphicon-play"></span> Rodar programa</button></div></div><script>
+
+        
+
+function example99beepers() {
+STARTER_CODE = `
+
+/*
+ * Arquivo: ColoqueMuitosBipers.java
+ * ---------------------------------
+ * Coloca 42 apitos usando um loop for
+ */
+import stanford.karel.*;
+public class ColoqueMuitosBipers extends Karel {
+   public void run() {
+      mover();
+      /* Repetir o batedor muitas vezes */
+      for(int i = 0; i < 42; i++) {
+      	colocarBeeper();
+      }
+      mover();
+   } 
+}
+`
+// because of that extra endline at the start of the string
+STARTER_CODE = STARTER_CODE.trim();
+
+ var karelIde = null;
+ var karelEditor = null;
+ var buttonState = 'play';
+
+ function main() {
+   karelEditor = importEditorCode('99beepersEditor','99beepersEditorDiv', STARTER_CODE, true);
+     //importRunButtonBar('example1ButtonBar');
+    
+    $("[title]").tooltip({ position: "bottom center", opacity: 0.9});
+    
+    initTabs();
+    var canvas = document.getElementById('99beepersCanvas');
+    karelIde = KarelIde(karelEditor, canvas, '99beepersStart', 0.8);
+    $('#99beepersRunButton').click(function(){playClicked()});
+    onresize();
+    
+ }
+
+ function playClicked() {
+  if(buttonState == 'play') {
+    karelIde.playButton();
+      
+      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+      $('#99beepersRunButton').html(resetText);
+      buttonState = 'reset';
+     } else if (buttonState == 'reset') {
+      karelIde.stopButton();
+      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+      $('#99beepersRunButton').html(playText);
+      buttonState = 'play';
+     }
+  
+  }
+
+ function onresize() { 
+    var parentHeight = 281.6;
+    var canvasWidth = 200
+    var parentWidth = $("#99beepers").width();
+    console.log('pw: ' + parentWidth);
+
+    var ide = document.getElementById('99beepersIde');
+    var editorDiv = document.getElementById('99beepersEditorDiv');
+    var canvas = document.getElementById('99beepersCanvasDiv');
+    
+    var ideHeight = parentHeight
+    var centerHeight = ideHeight;
+
+    var availibleWidth = parentWidth;
+    var elementSpacing = 12;
+
+    var editorWidth = availibleWidth - canvasWidth - elementSpacing; 
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasWidth + 'px';
+    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+    editorDiv.style.left = 0 + 'px'
+    editorDiv.style.width = editorWidth + 'px';
+    editorDiv.style.height = parentHeight + 'px';
+    console.log('editor width: ' + editorWidth)
+
+    if (karelEditor) {
+       karelEditor.renderer.onResize();
+    }
+ }
+ main()
+ 
+}
+example99beepers();
+    </script></div><p> O código acima é editável. Tente mudá-lo para que coloque apenas 15 apitos. </p><h3> Pós-condições de correspondência com condições prévias </h3><p> O exemplo anterior dá a impressão de que um loop for repete uma única linha de código. No entanto, o corpo do loop for (as instruções que são repetidas) podem ser múltiplas linhas. Aqui está um exemplo de um programa que coloca um bip em cada canto de um mundo: </p>
+
+
+
+<div class="section embeddedIde" id="cornerBeepers"><div class="ide getStarted" id="cornerBeepersIde" style="height:316.8px"><div class="ideCenter" id="cornerBeepersIdeCenter"><div class="ideEditorDiv" id="cornerBeepersEditorDiv" style="width:200px"></div><div class="ideCanvasDiv" id="cornerBeepersCanvasDiv"><canvas class="ideCanvas" id="cornerBeepersCanvas"></canvas></div></div></div><div style="width:100%;"><div class="buttonBar"><button class="btn btn-default" id="cornerBeepersRunButton"><span class="glyphicon glyphicon-play"></span> Rodar programa</button></div></div><script>
+
+        
+
+function examplecornerBeepers() {
+STARTER_CODE = `
+
+/*
+ * Ficheiro: CornerBeepers.java
+ * ----------------------------
+ * Coloca um bip em cada canto
+ */
+import stanford.karel.*;
+public class BipersDeCanto extends Karel {
+   public void run() {
+      /* repita o corpo 4 vezes */
+      for(int i = 0; i < 4; i++) {
+      	colocarBeeper();
+      	mover();
+      	mover();
+      	mover();
+      	vireAEsquerda();
+      }
+   } 
+}
+`
+// because of that extra endline at the start of the string
+STARTER_CODE = STARTER_CODE.trim();
+
+ var karelIde = null;
+ var karelEditor = null;
+ var buttonState = 'play';
+
+ function main() {
+   karelEditor = importEditorCode('cornerBeepersEditor','cornerBeepersEditorDiv', STARTER_CODE, true);
+     //importRunButtonBar('example1ButtonBar');
+    
+    $("[title]").tooltip({ position: "bottom center", opacity: 0.9});
+    
+    initTabs();
+    var canvas = document.getElementById('cornerBeepersCanvas');
+    karelIde = KarelIde(karelEditor, canvas, 'cornerBeepersStart', 0.0);
+    $('#cornerBeepersRunButton').click(function(){playClicked()});
+    onresize();
+    
+ }
+
+ function playClicked() {
+  if(buttonState == 'play') {
+    karelIde.playButton();
+      
+      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+      $('#cornerBeepersRunButton').html(resetText);
+      buttonState = 'reset';
+     } else if (buttonState == 'reset') {
+      karelIde.stopButton();
+      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+      $('#cornerBeepersRunButton').html(playText);
+      buttonState = 'play';
+     }
+  
+  }
+
+ function onresize() { 
+    var parentHeight = 316.8;
+    var canvasWidth = 200
+    var parentWidth = $("#cornerBeepers").width();
+    console.log('pw: ' + parentWidth);
+
+    var ide = document.getElementById('cornerBeepersIde');
+    var editorDiv = document.getElementById('cornerBeepersEditorDiv');
+    var canvas = document.getElementById('cornerBeepersCanvasDiv');
+    
+    var ideHeight = parentHeight
+    var centerHeight = ideHeight;
+
+    var availibleWidth = parentWidth;
+    var elementSpacing = 12;
+
+    var editorWidth = availibleWidth - canvasWidth - elementSpacing; 
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasWidth + 'px';
+    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+    editorDiv.style.left = 0 + 'px'
+    editorDiv.style.width = editorWidth + 'px';
+    editorDiv.style.height = parentHeight + 'px';
+    console.log('editor width: ' + editorWidth)
+
+    if (karelEditor) {
+       karelEditor.renderer.onResize();
+    }
+ }
+ main()
+ 
+}
+examplecornerBeepers();
+    </script></div>
+<p> Preste muita atenção à maneira como o programa flui por meio dessas instruções de controle. O programa percorre o conjunto de comandos no corpo do loop for, um de cada vez. Repete o corpo quatro vezes. </p><p> Talvez a única parte mais complicada de escrever um loop seja que você precisa que o estado do mundo no final do loop (a <b>pós</b>- <b>condição</b>) seja um estado válido do mundo para o início do loop (a <b>pré</b>- <b>condição</b>). No exemplo acima, as suposições correspondem. Bons tempos. No início do loop, Karel está sempre em um quadrado sem beepers voltados para o próximo canto vazio. E se você excluísse o vireAEsquerda no final do loop? A pós-condição no final da primeira iteração não satisfaria mais as suposições feitas sobre Karel voltado para o próximo canto vazio. O código é editável. Tente excluir o <code>vireAEsquerda();</code> comando para ver o que acontece! </p><h3> Loops aninhados </h3><p> Tecnicamente, o corpo de um loop for pode conter qualquer código de fluxo de controle, até mesmo outros loops. Aqui está um exemplo de um loop for que repete uma chamada para um método que também possui um loop for. Nós chamamos isso de loop &quot;aninhado&quot;. Tente ler o programa e entenda o que ele faz antes de executá-lo: 
+
+
+
+<div class="section embeddedIde" id="cornerBeepers10"><div class="ide getStarted" id="cornerBeepers10Ide" style="height:545.6px"><div class="ideCenter" id="cornerBeepers10IdeCenter"><div class="ideEditorDiv" id="cornerBeepers10EditorDiv" style="width:200px"></div><div class="ideCanvasDiv" id="cornerBeepers10CanvasDiv"><canvas class="ideCanvas" id="cornerBeepers10Canvas"></canvas></div></div></div><div style="width:100%;"><div class="buttonBar"><button class="btn btn-default" id="cornerBeepers10RunButton"><span class="glyphicon glyphicon-play"></span> Rodar programa</button></div></div><script>
+
+        
+
+function examplecornerBeepers10() {
+STARTER_CODE = `
+
+/*
+ * Ficheiro: CornerFiveBeepers.java
+ * --------------------------------
+ * Coloca cinco apitos em cada canto
+ */
+import stanford.karel.*;
+public class CantoCincoBeepers extends Karel {
+
+   public void run() {
+      /* Repita uma vez para cada canto */
+      for(int i = 0; i < 4; i++) {
+         colocarCincoBipers();
+         moverParaOPróximoCanto();
+      }
+   } 
+
+   /* reposicionar karel para a próxima esquina */
+   public void moverParaOPróximoCanto() {
+      mover();
+      mover();
+      mover();
+      vireAEsquerda();
+   }
+
+   /* coloca 5 apitos usando um loop for */
+   public void colocarCincoBipers() {
+      for(int i = 0; i < 5; i++) {
+      	colocarBeeper();
+      }
+   }
+}
+`
+// because of that extra endline at the start of the string
+STARTER_CODE = STARTER_CODE.trim();
+
+ var karelIde = null;
+ var karelEditor = null;
+ var buttonState = 'play';
+
+ function main() {
+   karelEditor = importEditorCode('cornerBeepers10Editor','cornerBeepers10EditorDiv', STARTER_CODE, false);
+     //importRunButtonBar('example1ButtonBar');
+    
+    $("[title]").tooltip({ position: "bottom center", opacity: 0.9});
+    
+    initTabs();
+    var canvas = document.getElementById('cornerBeepers10Canvas');
+    karelIde = KarelIde(karelEditor, canvas, 'cornerBeepersStart', 0.7);
+    $('#cornerBeepers10RunButton').click(function(){playClicked()});
+    onresize();
+    
+ }
+
+ function playClicked() {
+  if(buttonState == 'play') {
+    karelIde.playButton();
+      
+      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+      $('#cornerBeepers10RunButton').html(resetText);
+      buttonState = 'reset';
+     } else if (buttonState == 'reset') {
+      karelIde.stopButton();
+      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+      $('#cornerBeepers10RunButton').html(playText);
+      buttonState = 'play';
+     }
+  
+  }
+
+ function onresize() { 
+    var parentHeight = 545.6;
+    var canvasWidth = 200
+    var parentWidth = $("#cornerBeepers10").width();
+    console.log('pw: ' + parentWidth);
+
+    var ide = document.getElementById('cornerBeepers10Ide');
+    var editorDiv = document.getElementById('cornerBeepers10EditorDiv');
+    var canvas = document.getElementById('cornerBeepers10CanvasDiv');
+    
+    var ideHeight = parentHeight
+    var centerHeight = ideHeight;
+
+    var availibleWidth = parentWidth;
+    var elementSpacing = 12;
+
+    var editorWidth = availibleWidth - canvasWidth - elementSpacing; 
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasWidth + 'px';
+    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+    editorDiv.style.left = 0 + 'px'
+    editorDiv.style.width = editorWidth + 'px';
+    editorDiv.style.height = parentHeight + 'px';
+    console.log('editor width: ' + editorWidth)
+
+    if (karelEditor) {
+       karelEditor.renderer.onResize();
+    }
+ }
+ main()
+ 
+}
+examplecornerBeepers10();
+    </script></div></p></p><hr/><center><a class="btn btn-primary btn-lg" href="chapter6.html" role="button">Próximo Capítulo</a></center>
+
+
+
+<div style="height:60px"></div>
+<!-- <div class="footer">
+	<p class="pull-left">
+		&#169; Stanford 2018 &#124; Made by Chris Piech. Built off "Karel the Robot Learns Java" by Eric Roberts. 
+	</p>
+</div>-->
+<!-- <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74362126-1', 'auto');
+  ga('send', 'pageview');
+
+</script>--></div></div></div><!-- right gutter --><div style="flex-grow:4"></div></div></div></body></html>

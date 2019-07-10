@@ -1,0 +1,175 @@
+<html><head>
+<title> קארל רידר </title><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><script src="../plugins/jquery.min.js"></script><link href="../plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/><script src="../plugins/bootstrap/js/bootstrap.min.js"></script><link href="../style.css" rel="stylesheet"/><script src="..//karel/js/html/websiteImports.js"></script><script>importCss();</script><script>importJs();</script></head><body style=";text-align:right;direction:rtl"><!-- container --><div class="bookContainer" style=";text-align:right;direction:rtl">
+<!-- side bar --><div class="bookSideBar" style=";text-align:right;direction:rtl"><div class="homeLink" style=";text-align:right;direction:rtl"><a href="http://cs106a.stanford.edu"><span aria-hidden="true" class="glyphicon glyphicon-home"></span> CS106A</a></div><hr/><div class="sideBarTitle" style=";text-align:right;direction:rtl"><a href="../he/intro.html" style="color:black">קארל רידר</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter1.html">1 - פגוש את קארל</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter2.html">2 - תכנות</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter3.html">שיטות חדשות</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter4.html">4 - פירוק</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter5.html">5 - לולאות</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter6.html">6 - בעוד לולאות</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter7.html">7 - תנאים</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter8.html">8 - צמצום</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter9.html">9 - אלגוריתמים</a></div><div class="chapterTab" style=";text-align:right;direction:rtl"><a class="bookLink btn btn-link" href="../he/chapter10.html">10 - SuperKarel</a></div><!-- <center>
+    <img style ="width:75px;" src="../images/stanford.png"/>
+    </center>--></div><!-- content --><div class="bookContent" style="display: flex;;text-align:right;direction:rtl"><!-- right gutter --><div style="flex-grow:1;max-width:50px;;text-align:right;direction:rtl"></div><!-- main stuff --><div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px;text-align:right;direction:rtl"><div class="row" style=";text-align:right;direction:rtl"><div class="col-md-12 col-xs-12" style=";text-align:right;direction:rtl">
+
+<h1 style=";text-align:right;direction:rtl"> פרק 4: פירוק </h1><hr/><p style=";text-align:right;direction:rtl"> כדרך להמחשת יותר כוח שמגיע עם היכולת להגדיר שיטות חדשות, זה שימושי כדי לעשות קארל לעשות משהו קצת יותר מעשי מאשר להעביר ביפר ממקום אחד למשנהו. כבישים סביב פאלו אלטו נראה לעתים קרובות זקוק לתיקון, וזה יכול להיות כיף לראות אם קארל יכול למלא מהמורות בעולם המופשט שלה. לדוגמה, דמיינו שקארל עומד על &quot;הדרך&quot; שמופיעה בדמות השמאלית, בפינה אחת משמאל למכשול בכביש. התפקיד של קארל הוא למלא את החור עם ביפר ולהמשיך לפינה הבאה. התרשים בצד ימין ממחיש כיצד העולם צריך להשגיח על ביצוע התוכנית. </p>
+
+
+
+<div class="section" id="ba" style=";text-align:right;direction:rtl"><div class="ide getStarted" id="baIde" style=";text-align:right;direction:rtl"><div class="commandCanvasDiv" id="baCanvasDiv" style=";text-align:right;direction:rtl"><div style=";text-align:right;direction:rtl"><div class="commandCanvasTitle" style=";text-align:right;direction:rtl"> לפני: </div><div class="commandCanvasOuter" style=";text-align:right;direction:rtl"><canvas id="baCanvasBefore" style="width:300px;"></canvas></div></div><div style="width:50px;text-align:right;direction:rtl"></div><div style=";text-align:right;direction:rtl"><div class="commandCanvasTitle" style=";text-align:right;direction:rtl"> לאחר: </div><div class="commandCanvasOuter" style=";text-align:right;direction:rtl"><canvas id="baCanvasAfter" style="width:300px;"></canvas></div></div></div></div><script>
+
+        
+
+function exampleba() {
+ var karelIde = null;
+ var buttonState = 'play';
+ var canvas = null;
+
+ function main() {
+    canvas = document.getElementById('baCanvasBefore');
+    karelIde = KarelIde(null, canvas, 'pothole', 0.0, 1000, 0.82 * 1000);
+
+    let canvasGoal = document.getElementById('baCanvasAfter');
+    let goalIde = KarelIde(null, canvasGoal, 'potholeGoal',0.0,  1000, 0.82 * 1000)
+ }
+
+ 
+ main()
+ 
+}
+exampleba();
+    </script></div>
+<p style=";text-align:right;direction:rtl"> אם אתה מוגבל לארבע פקודות מוגדרות מראש, להפעיל את השיטה כדי לפתור בעיה זו ייראה כך: </p><p style="margin-left:2em;text-align:right;direction:rtl"><code><span class="keyword">private void</span> run() {</code><br/><code style="margin-left:2em">מהלך_\_לזוז_\_לעבור();</code><br/><code style="margin-left:2em">פונהשמאלה();</code><br/><code style="margin-left:2em">פונהשמאלה();</code><br/><code style="margin-left:2em">פונהשמאלה();</code><br/><code style="margin-left:2em">מהלך_\_לזוז_\_לעבור();</code><br/><code style="margin-left:2em">שיםאתביפר();</code><br/><code style="margin-left:2em">פונהשמאלה();</code><br/><code style="margin-left:2em">פונהשמאלה();</code><br/><code style="margin-left:2em">מהלך_\_לזוז_\_לעבור();</code><br/><code style="margin-left:2em">פונהשמאלה();</code><br/><code style="margin-left:2em">פונהשמאלה();</code><br/><code style="margin-left:2em">פונהשמאלה();</code><br/><code style="margin-left:2em">מהלך_\_לזוז_\_לעבור();</code><br/><code>}</code></p><p style=";text-align:right;direction:rtl"> המוטיבציה הראשונית להגדרת שיטת ה&quot;פניימה &quot;היתה, כי היה זה מסורבל לחזור על שלוש פקודות פונשמאלה כדי להשיג זכות. הגדרת שיטות חדשות יש מטרה חשובה נוספת מעבר המאפשר לך להימנע חוזר על רצפים הפקודה אותו בכל פעם שאתה רוצה לבצע משימה מסוימת. הכוח להגדיר שיטות פותח את האסטרטגיה החשובה ביותר בתכנות - תהליך של שבירת בעיה גדולה לתוך חלקים קטנים יותר כי הם יותר קל לפתור. תהליך שבירת תוכנית לתוך חלקים קטנים יותר נקרא פירוק, ואת החלקים רכיב של בעיה גדולה נקראים בעיות משנה. </p><p style=";text-align:right;direction:rtl"> כדוגמה, את הבעיה של מילוי החור בכביש יכול להיות מפורקת לתוך הבעיות הבאות: </p><ol style=";text-align:right;direction:rtl"><li style=";text-align:right;direction:rtl"> זז עד החור <li style=";text-align:right;direction:rtl"> ממלאים את החור על ידי הטלת ביפר לתוכו <li style=";text-align:right;direction:rtl"> עבור לפינה הבאה </li></li></li></ol><p style=";text-align:right;direction:rtl"> אם אתה חושב על הבעיה בדרך זו, אתה יכול להשתמש בהגדרות השיטה כדי ליצור תוכנית המשקפת את התפיסה של מבנה התוכנית. שיטת הריצה תיראה כך: </p><p style="margin-left:2em;text-align:right;direction:rtl"><code><span class="keyword">private void</span> run() {</code><br/><code style="margin-left:2em">מהלך_\_לזוז_\_לעבור();</code><br/><code style="margin-left:2em">מילוי();</code><br/><code style="margin-left:2em">מהלך_\_לזוז_\_לעבור();</code><br/><code>}</code></p><p style=";text-align:right;direction:rtl"> ההתכתבות עם המתאר מיד ברורה, והכל יהיה נהדר אם רק אתה יכול לקבל קארל להבין מה אתה מתכוון מילוי. בהתחשב בעוצמה להגדיר שיטות, יישום מילוי הוא פשוט מאוד. כל שעליכם לעשות הוא להגדיר שיטת מילוי שגופה מורכב מהפקודות שכבר כתבתם כדי לבצע את העבודה, כך: </p><p style="margin-left:2em;text-align:right;direction:rtl"><code><span class="keyword">private void</span> מילוי() {</code><br/><code style="margin-left:2em">פנהימינה();</code><br/><code style="margin-left:2em">מהלך_\_לזוז_\_לעבור();</code><br/><code style="margin-left:2em">שיםאתביפר();</code><br/><code style="margin-left:2em">תסתובב();</code><br/><code style="margin-left:2em">מהלך_\_לזוז_\_לעבור();</code><br/><code style="margin-left:2em">פנהימינה();</code><br/><code>}</code></p><p style=";text-align:right;direction:rtl"> הנה התוכנית המלאה. שימו לב איך אתה יכול להבין את המתכנתים כוונה פשוט לקרוא את שיטת הריצה. כאשר אתה מפעיל את התוכנית, הדגשת שורה מראה כיצד מחשב יבצע את זה, צעד אחר צעד. עם זאת, בגלל התוכנית הוא נשבר יפה למטה נוכל להבין את זה על רמת מחשבה אנושית: </p>
+
+
+
+<div class="section embeddedIde" id="pothole" style=";text-align:right;direction:rtl"><div class="ide getStarted" id="potholeIde" style="height:633.6px;text-align:right;direction:rtl"><div class="ideCenter" id="potholeIdeCenter" style=";text-align:right;direction:rtl"><div class="ideEditorDiv" id="potholeEditorDiv" style="width:200px;text-align:right;direction:rtl"></div><div class="ideCanvasDiv" id="potholeCanvasDiv" style=";text-align:right;direction:rtl"><canvas class="ideCanvas" id="potholeCanvas"></canvas></div></div></div><div style="width:100%;;text-align:right;direction:rtl"><div class="buttonBar" style=";text-align:right;direction:rtl"><button class="btn btn-default" id="potholeRunButton"><span class="glyphicon glyphicon-play"></span> הפעל תוכנית</button></div></div><script>
+
+        
+
+function examplepothole() {
+STARTER_CODE = `
+
+import סטנפורד.קאראל.*;
+public class מהמורותמילויקארל extends קארל {
+   public void run() {
+      מהלך_\_לזוז_\_לעבור();
+      מילוי();
+      מהלך_\_לזוז_\_לעבור();
+   }
+
+   /**
+    * ממלא את המכל מתחת למיקום הנוכחי של קארל על ידי
+    * הנחת ביפר בפינה. כדי ששיטה זו תעבוד כראוי, קארל
+    * חייב להיות פונה מזרחה מעל למזרח. עם סיום הביצוע,
+    * קארל יחזור לאותו ריבוע ויהיה שוב פונה מזרחה.
+    */
+   private void מילוי() {
+      פנהימינה();
+      מהלך_\_לזוז_\_לעבור();
+      שיםאתביפר();
+      תסתובב();
+      מהלך_\_לזוז_\_לעבור();
+      פנהימינה();
+   } 
+
+   /** הופך קארל 90 מעלות ימינה. */
+   public void פנהימינה() {
+      פונהשמאלה();
+      פונהשמאלה();
+      פונהשמאלה();
+   }
+
+   /** הופכת קארל סביב 180 מעלות. */
+   public void תסתובב() {
+      פונהשמאלה();
+      פונהשמאלה();
+   }
+}
+`
+// because of that extra endline at the start of the string
+STARTER_CODE = STARTER_CODE.trim();
+
+ var karelIde = null;
+ var karelEditor = null;
+ var buttonState = 'play';
+
+ function main() {
+   karelEditor = importEditorCode('potholeEditor','potholeEditorDiv', STARTER_CODE, false);
+     //importRunButtonBar('example1ButtonBar');
+    
+    $("[title]").tooltip({ position: "bottom center", opacity: 0.9});
+    
+    initTabs();
+    var canvas = document.getElementById('potholeCanvas');
+    karelIde = KarelIde(karelEditor, canvas, 'pothole', 0.0);
+    $('#potholeRunButton').click(function(){playClicked()});
+    onresize();
+    
+ }
+
+ function playClicked() {
+  if(buttonState == 'play') {
+    karelIde.playButton();
+      
+      var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+      $('#potholeRunButton').html(resetText);
+      buttonState = 'reset';
+     } else if (buttonState == 'reset') {
+      karelIde.stopButton();
+      var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+      $('#potholeRunButton').html(playText);
+      buttonState = 'play';
+     }
+  
+  }
+
+ function onresize() { 
+    var parentHeight = 633.6;
+    var canvasWidth = 200
+    var parentWidth = $("#pothole").width();
+    console.log('pw: ' + parentWidth);
+
+    var ide = document.getElementById('potholeIde');
+    var editorDiv = document.getElementById('potholeEditorDiv');
+    var canvas = document.getElementById('potholeCanvasDiv');
+    
+    var ideHeight = parentHeight
+    var centerHeight = ideHeight;
+
+    var availibleWidth = parentWidth;
+    var elementSpacing = 12;
+
+    var editorWidth = availibleWidth - canvasWidth - elementSpacing; 
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasWidth + 'px';
+    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+    editorDiv.style.left = 0 + 'px'
+    editorDiv.style.width = editorWidth + 'px';
+    editorDiv.style.height = parentHeight + 'px';
+    console.log('editor width: ' + editorWidth)
+
+    if (karelEditor) {
+       karelEditor.renderer.onResize();
+    }
+ }
+ main()
+ 
+}
+examplepothole();
+    </script></div><hr/><center style=";text-align:right;direction:rtl"><a class="btn btn-primary btn-lg" href="chapter5.html" role="button">פרק הבא</a></center>
+
+
+
+<div style="height:60px;text-align:right;direction:rtl"></div>
+<!-- <div class="footer">
+	<p class="pull-left">
+		&#169; Stanford 2018 &#124; Made by Chris Piech. Built off "Karel the Robot Learns Java" by Eric Roberts. 
+	</p>
+</div>-->
+<!-- <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74362126-1', 'auto');
+  ga('send', 'pageview');
+
+</script>--></div></div></div><!-- right gutter --><div style="flex-grow:4;text-align:right;direction:rtl"></div></div></div></body></html>

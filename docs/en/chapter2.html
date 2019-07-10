@@ -29,42 +29,47 @@
   </div>
   <hr/>
   
-  <div class="chapterTab">
+  <div class="chapterTab" onclick="location.href='../en/chapter1.html'">
     <a class="bookLink btn btn-link" href="../en/chapter1.html">
       1 - Meet Karel
-    </a></div>
-  <div class="chapterTab">
+    </a>
+  </div>
+  <div class="chapterTab" onclick="location.href='../en/chapter2.html'">
     <a class="bookLink btn btn-link" href="../en/chapter2.html">2 - Programming</a>
   </div>
-  <div class="chapterTab">
+  <div class="chapterTab" onclick="location.href='../en/chapter3.html'">
     <a class="bookLink btn btn-link" href="../en/chapter3.html">3 - New Methods</a>
   </div>
-  <div class="chapterTab">
+  <div class="chapterTab" onclick="location.href='../en/chapter4.html'">
     <a class="bookLink btn btn-link" href="../en/chapter4.html">4 - Decomposition</a>
   </div>
-  <div class="chapterTab">
+  <div class="chapterTab" onclick="location.href='../en/chapter5.html'">
     <a class="bookLink btn btn-link" href="../en/chapter5.html">5 - For Loops</a>
   </div>
-  <div class="chapterTab">
+  <div class="chapterTab" onclick="location.href='../en/chapter6.html'">
     <a class="bookLink btn btn-link" href="../en/chapter6.html">6 - While Loops</a>
   </div>
-  <div class="chapterTab">
+  <div class="chapterTab" onclick="location.href='../en/chapter7.html'">
     <a class="bookLink btn btn-link" href="../en/chapter7.html">7 - Conditionals</a>
   </div>
-  <div class="chapterTab">
+  <div class="chapterTab" onclick="location.href='../en/chapter8.html'">
     <a class="bookLink btn btn-link" href="../en/chapter8.html">8 - Refinement</a>
   </div>
-  <div class="chapterTab">
+  <div class="chapterTab" onclick="location.href='../en/chapter9.html'">
     <a class="bookLink btn btn-link" href="../en/chapter9.html">9 - SuperKarel</a>
   </div>
 
-  <div class="chapterTab">
+  <div class="chapterTab" onclick="location.href='../en/reference.html'">
     <a class="bookLink btn btn-link" href="../en/reference.html">10 - Reference</a>
   </div>
 
-  <div class="chapterTab">
+  <div class="chapterTab" onclick="location.href='../en/ide.html'">
     <a class="bookLink btn btn-link" href="../en/ide.html">11 - Code</a>
   </div>
+
+  <hr/>
+
+  <a href="../"><img style = "width:40px" src="../images/unFlag.png"/> Learn more</a> 
 
   <!-- <center>
     <img style ="width:75px;" src="../images/stanford.png"/>
@@ -90,7 +95,7 @@ Chapter 2: Programming Karel
 
 
 <div class="section embeddedIde" id="beeperPicking">
-    <div id ='beeperPickingIde' class = "ide getStarted" style="height:299.2px">
+    <div id ='beeperPickingIde' class = "ide getStarted" style="height:299.20000000000005px">
       <div id = 'beeperPickingIdeCenter' class = "ideCenter" >
          <div id = 'beeperPickingEditorDiv' class = 'ideEditorDiv' style="width:200px"></div>
          <div id = 'beeperPickingCanvasDiv' class = 'ideCanvasDiv'>
@@ -110,15 +115,15 @@ Chapter 2: Programming Karel
 function examplebeeperPicking() {
 STARTER_CODE = `
 /*
- * File: BeeperPickingKarel.java
+ * File: FirstKarel.java
  * -----------------------------
- * The BeeperPickingKarel program defines a "run" 
+ * The FirstKarel program defines a "run" 
  * method with three commands. These commands cause  
  * Karel to move forward one block, pick up a beeper
  * and then move ahead to the next corner.
  */
 import stanford.karel.*;
-public class BeeperPickingKarel extends Karel {
+public class FirstKarel extends Karel {
    /* the program begins running here */
    public void run() {
       move();
@@ -141,7 +146,7 @@ STARTER_CODE = STARTER_CODE.trim();
     
     initTabs();
     var canvas = document.getElementById('beeperPickingCanvas');
-    karelIde = KarelIde(karelEditor, canvas, 'stepUp', 0.0);
+    karelIde = KarelIde(karelEditor, canvas, 'stepUp', 0.0, 'en');
     $('#beeperPickingRunButton').click(function(){playClicked()});
     onresize();
     
@@ -164,7 +169,7 @@ STARTER_CODE = STARTER_CODE.trim();
   }
 
  function onresize() { 
-    var parentHeight = 299.2;
+    var parentHeight = 299.20000000000005;
     var canvasWidth = 300
     var parentWidth = $("#beeperPicking").width();
     console.log('pw: ' + parentWidth);
@@ -210,13 +215,13 @@ Press the "Run" button to execute the program. Programs are typically written in
 
 <p class="demoCode" style="margin-left:10px">
 <pre class="comment" translate="no">/*
-&nbsp;* File: BeeperPickingKarel.java
-&nbsp;* -----------------------------
-&nbsp;* The BeeperPickingKarel program defines a "run"
-&nbsp;* method with three commands. These commands cause
-&nbsp;* Karel to move forward one block, pick up a beeper
-&nbsp;* and then move ahead to the next corner.
-&nbsp;*/</pre>
+ * File: FirstKarel.java
+ * -----------------------------
+ * The FirstKarel program defines a "run"
+ * method with three commands. These commands cause
+ * Karel to move forward one block, pick up a beeper
+ * and then move ahead to the next corner.
+ */</pre>
 </p>
 
 <p>
@@ -233,7 +238,7 @@ Press the "Run" button to execute the program. Programs are typically written in
  The final part of the Karel program consists of the following program definition:
 </p>
 <p class="demoCode" style="margin-left:10px">
-<code><span class="keyword">public class</span> BeeperPickingKarel <span class="keyword">extends</span> Karel {</code><br/>
+<code><span class="keyword">public class</span> FirstKarel <span class="keyword">extends</span> Karel {</code><br/>
 <code>&nbsp;&nbsp;&nbsp;<span class="keyword">public void</span> run() {</code><br/>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;move();</code><br/>
 <code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;pickBeeper();</code><br/>
@@ -242,25 +247,25 @@ Press the "Run" button to execute the program. Programs are typically written in
 <code>}</code><br/>
 </p>
 <p>
-  To understand this definition, it is useful to look more carefully at its structure. The definition of the BeeperPickingKarel program consists of the line beginning with <code class="keyword">public class</code> and encompasses everything between the curly brace at the end of that line and the corresponding closing brace on the last line of the program. The single line that introduces the new class is called the <b>header</b> of the definition; the code between the braces is called the <b>body</b>.
+  To understand this definition, it is useful to look more carefully at its structure. The definition of the FirstKarel program consists of the line beginning with <code class="keyword">public class</code> and encompasses everything between the curly brace at the end of that line and the corresponding closing brace on the last line of the program. The single line that introduces the new class is called the <b>header</b> of the definition; the code between the braces is called the <b>body</b>.
 </p>
 <p>
-  In programming, it is often very useful to think about a particular definition and its body as separable ideas. In this example, the definition of BeeperPickingKarel has the following form, where the entire body of the definition can be put out of your mind for the moment:
+  In programming, it is often very useful to think about a particular definition and its body as separable ideas. In this example, the definition of FirstKarel has the following form, where the entire body of the definition can be put out of your mind for the moment:
 </p>
 
 <p class="demoCode" style="margin-left:10px">
-<code><span class="keyword">public class</span> BeeperPickingKarel <span class="keyword">extends</span> Karel {</code><br/>
+<code><span class="keyword">public class</span> FirstKarel <span class="keyword">extends</span> Karel {</code><br/>
 <i class="demoText" style="margin-left:2em">body of the program definition</i><br/>
 <code>}</code><br/>
 </p>
 
 <p>
-  The header line at the top tells you quite a bit about the BeeperPickingKarel program, even before you have looked to see what the body contains. The phrase <code class="keyword">public class</code> starts the definition of a program. The phrase <code><span class="keyword">extends</span> Karel</code> is used to indicate that <code>BeeperPickingKarel</code> is a Karel program.
+  The header line at the top tells you quite a bit about the FirstKarel program, even before you have looked to see what the body contains. The phrase <code class="keyword">public class</code> starts the definition of a program. The phrase <code><span class="keyword">extends</span> Karel</code> is used to indicate that <code>FirstKarel</code> is a Karel program.
 </p>
 
 
 <p>
-Now let's look at the body of the BeeperPickingKarel program. That body consists of the following lines:
+Now let's look at the body of the FirstKarel program. That body consists of the following lines:
 </p>
 <p class="demoCode" style="margin-left:10px">
 <code>&nbsp;&nbsp;&nbsp;<span class="keyword">public void</span> run() {</code><br/>
@@ -270,7 +275,7 @@ Now let's look at the body of the BeeperPickingKarel program. That body consists
 <code>&nbsp;&nbsp;&nbsp;}</code><br/>
 </p>
 <p>
-These lines represent the definition of a new <b>method</b>, which specifies the sequence of steps necessary to respond to a command. As in the case of the BeeperPickingKarel program itself, the method definition consists of two parts that can be considered separately: The first line constitutes the method header and the code between the curly braces is the method body. If you ignore the body for now, the method definition looks like this:
+These lines represent the definition of a new <b>method</b>, which specifies the sequence of steps necessary to respond to a command. As in the case of the FirstKarel program itself, the method definition consists of two parts that can be considered separately: The first line constitutes the method header and the code between the curly braces is the method body. If you ignore the body for now, the method definition looks like this:
 </p>
 <p class="demoCode" style="margin-left:10px">
 <code>&nbsp;&nbsp;&nbsp;<span class="keyword">public void</span> run() {</code><br/>
@@ -278,7 +283,7 @@ These lines represent the definition of a new <b>method</b>, which specifies the
 <code>&nbsp;&nbsp;&nbsp;}</code><br/>
 </p>
 <p>
-The first two words in the method header, <code class="keyword">public</code> and <code class="keyword">void</code>, are part of Java’s syntactic structure, and you should feel free to ignore them at this point. The next word on the header line specifies the name of the new method, which in this case is the method <b>run</b>. Defining a method means that Karel can now respond to a new command with that name. The <code>run</code> command plays a special role in a Karel program. When you start a Karel program it creates a new Karel instance, adds that Karel to a world that you specify, and then issues the run command. The effect of running the program is defined by the body of the run method, which is a sequence of commands that the robot will execute in order. For example, the body of the run method for the BeeperPickingKarel program is:
+The first two words in the method header, <code class="keyword">public</code> and <code class="keyword">void</code>, are part of Java’s syntactic structure, and you should feel free to ignore them at this point. The next word on the header line specifies the name of the new method, which in this case is the method <b>run</b>. Defining a method means that Karel can now respond to a new command with that name. The <code>run</code> command plays a special role in a Karel program. When you start a Karel program it creates a new Karel instance, adds that Karel to a world that you specify, and then issues the run command. The effect of running the program is defined by the body of the run method, which is a sequence of commands that the robot will execute in order. For example, the body of the run method for the FirstKarel program is:
 </p>
 <p class="demoCode" style="margin-left:10px">
 <code>&nbsp;&nbsp;&nbsp;move();</code><br/>
@@ -319,10 +324,10 @@ function exampleba2() {
 
  function main() {
     canvas = document.getElementById('ba2CanvasBefore');
-    karelIde = KarelIde(null, canvas, 'stepUp', 0.0, 1000, 0.7 * 1000);
+    karelIde = KarelIde(null, canvas, 'stepUp', 0.0, 'en',1000, 0.7 * 1000);
 
     let canvasGoal = document.getElementById('ba2CanvasAfter');
-    let goalIde = KarelIde(null, canvasGoal, 'stepUpM1',0.0,  1000, 0.7 * 1000)
+    let goalIde = KarelIde(null, canvasGoal, 'stepUpM1',0.0, 'en',  1000, 0.7 * 1000)
  }
 
  
@@ -333,7 +338,7 @@ exampleba2();
     </script>
 </div><h2>Solving a more interesting problem</h2>
 <p>
-  The BeeperPickingKarel program defined above doesn’t do very much as yet. Let’s try to make it a little more interesting. Suppose that the goal is not simply to get Karel to pick up the beeper but to move the beeper from its initial position on 2nd column and 1st row to the center of a ledge. Thus, your next assignment is to define a new Karel program that accomplishes the task illustrated in this diagram:
+  The FirstKarel program defined above doesn’t do very much as yet. Let’s try to make it a little more interesting. Suppose that the goal is not simply to get Karel to pick up the beeper but to move the beeper from its initial position on 2nd column and 1st row to the center of a ledge. Thus, your next assignment is to define a new Karel program that accomplishes the task illustrated in this diagram:
   </p>
 
 <div class="section" id="ba3">
@@ -366,10 +371,10 @@ function exampleba3() {
 
  function main() {
     canvas = document.getElementById('ba3CanvasBefore');
-    karelIde = KarelIde(null, canvas, 'stepUp', 0.0, 1000, 0.7 * 1000);
+    karelIde = KarelIde(null, canvas, 'stepUp', 0.0, 'en',1000, 0.7 * 1000);
 
     let canvasGoal = document.getElementById('ba3CanvasAfter');
-    let goalIde = KarelIde(null, canvasGoal, 'stepUpGoal',0.0,  1000, 0.7 * 1000)
+    let goalIde = KarelIde(null, canvasGoal, 'stepUpGoal',0.0, 'en',  1000, 0.7 * 1000)
  }
 
  
@@ -413,7 +418,7 @@ function exampleba3() {
 
  function main() {
     canvas = document.getElementById('ba3Canvas');
-    karelIde = KarelIde(null, canvas, 'stepUpM2', 0,1000, 0.7 * 1000);
+    karelIde = KarelIde(null, canvas, 'stepUpM2', 0, 'en',1000, 0.7 * 1000);
  }
 
  
@@ -431,7 +436,7 @@ exampleba3();
 
 
 <div class="section embeddedIde" id="stepUp">
-    <div id ='stepUpIde' class = "ide getStarted" style="height:422.4px">
+    <div id ='stepUpIde' class = "ide getStarted" style="height:422.40000000000003px">
       <div id = 'stepUpIdeCenter' class = "ideCenter" >
          <div id = 'stepUpEditorDiv' class = 'ideEditorDiv' style="width:200px"></div>
          <div id = 'stepUpCanvasDiv' class = 'ideCanvasDiv'>
@@ -489,7 +494,7 @@ STARTER_CODE = STARTER_CODE.trim();
     
     initTabs();
     var canvas = document.getElementById('stepUpCanvas');
-    karelIde = KarelIde(karelEditor, canvas, 'stepUp', 0.5);
+    karelIde = KarelIde(karelEditor, canvas, 'stepUp', 0.5, 'en');
     $('#stepUpRunButton').click(function(){playClicked()});
     onresize();
     
@@ -512,7 +517,7 @@ STARTER_CODE = STARTER_CODE.trim();
   }
 
  function onresize() { 
-    var parentHeight = 422.4;
+    var parentHeight = 422.40000000000003;
     var canvasWidth = 300
     var parentWidth = $("#stepUp").width();
     console.log('pw: ' + parentWidth);
@@ -555,29 +560,7 @@ examplestepUp();
 </center>
 </p>
 
-
-
-
-<div style="height:60px"></div>
-
-<!-- <div class="footer">
-	<p class="pull-left">
-		&#169; Stanford 2018 &#124; Made by Chris Piech. Built off "Karel the Robot Learns Java" by Eric Roberts. 
-	</p>
-</div> -->
-	
-
-<!-- <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-74362126-1', 'auto');
-  ga('send', 'pageview');
-
-</script> -->
-        </div>
+<div style="height:60px"></div>        </div>
       </div>
 
       </div>

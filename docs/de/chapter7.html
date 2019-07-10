@@ -1,0 +1,212 @@
+<html><head>
+<title> Karel Reader </title><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><script src="../plugins/jquery.min.js"></script><link href="../plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/><script src="../plugins/bootstrap/js/bootstrap.min.js"></script><link href="../style.css" rel="stylesheet"/><script src="..//karel/js/html/websiteImports.js"></script><script>importCss();</script><script>importJs();</script></head><body><!-- container --><div class="bookContainer">
+<!-- side bar -->
+<div class="bookSideBar">
+<div class="homeLink">
+ <a href="../de/intro.html">
+<span aria-hidden="true" class="glyphicon glyphicon-home"></span> Karel</a> 
+</div>
+<hr/>
+<div class="chapterTab" onclick="location.href='../de/chapter1.html'">
+<a class="bookLink btn btn-link" href="../de/chapter1.html">1 - Treffen Sie Karel</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter2.html'">
+<a class="bookLink btn btn-link" href="../de/chapter2.html">2 - Programmierung</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter3.html'">
+<a class="bookLink btn btn-link" href="../de/chapter3.html">3 - Neue Methoden</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter4.html'">
+<a class="bookLink btn btn-link" href="../de/chapter4.html">4 - Zersetzung</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter5.html'">
+<a class="bookLink btn btn-link" href="../de/chapter5.html">5 - Für Schleifen</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter6.html'">
+<a class="bookLink btn btn-link" href="../de/chapter6.html">6 - While-Schleifen</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter7.html'">
+<a class="bookLink btn btn-link" href="../de/chapter7.html">7 - Bedingungen</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter8.html'">
+<a class="bookLink btn btn-link" href="../de/chapter8.html">8 - Verfeinerung</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/chapter9.html'">
+<a class="bookLink btn btn-link" href="../de/chapter9.html">9 - SuperKarel</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/reference.html'">
+<a class="bookLink btn btn-link" href="../de/reference.html">10 - Referenz</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../de/ide.html'">
+<a class="bookLink btn btn-link" href="../de/ide.html">11 - Code</a> 
+</div>
+<hr/>
+ <a href="../"><img src="../images/unFlag.png" style="width:40px"/> Mehr erfahren</a> 
+<!-- <center>
+    <img style ="width:75px;" src="../images/stanford.png"/> 
+    </center> -->
+</div><!-- content --><div class="bookContent" style="display: flex;"><!-- right gutter --><div style="flex-grow:1;max-width:50px;"></div><!-- main stuff --><div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px"><div class="row"><div class="col-md-12 col-xs-12">
+
+<h1> Kapitel 7: If-Anweisungen </h1><hr/><p> Das letzte zu erlernende Steuerungskonstruktions-Steuerungskonstrukt für die Kernprogrammierung sind bedingte Anweisungen ( <code>if</code> und <code>if/else</code>). </p><h3> Grundlegende Bedingungen </h3><p> Eine <code>if/else</code> Anweisung führt genau dann einen &quot;if&quot; -Codeblock aus, wenn der bereitgestellte <i class="demoText">Test</i> für den Zustand der Welt zum Zeitpunkt des Erreichens der Anweisung durch den <i class="demoText">Test</i> wahr ist. Andernfalls führt das Programm den Codeblock &quot;else&quot; aus. </p><p class="demoCode"><code><span class="keyword">if</span>(</code><i class="demoText">test</i><code>){</code><br/><i class="demoText" style="margin-left:2em">wenn Codeblock</i><br/><code>} <span class="keyword">else</span>{</code><br/><i class="demoText" style="margin-left:2em">sonst Code-Block</i><br/><code>}</code></p><p> Um ein Gefühl dafür zu bekommen, wo sich bedingte Anweisungen als nützlich erweisen könnten, schreiben wir ein Programm, in dem Karel eine Reihe von Piepsern invertiert. Wenn ein Feld zuvor einen Piepser hatte, sollte Karel es abholen. Wenn ein Feld keinen Piepser hat, sollte Karel einen niederlegen. </p>
+
+
+
+<div class="section embeddedIde" id="invertLine"><div class="ide getStarted" id="invertLineIde" style="height:404.8px"><div class="ideCenter" id="invertLineIdeCenter"><div class="ideEditorDiv" id="invertLineEditorDiv" style="width:200px"></div><div class="ideCanvasDiv" id="invertLineCanvasDiv"><div class="worldDropdown"><div class="dropdown"><button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">Ändern Sie die Welt <span class="caret"></span></button><ul aria-labelledby="dropdownMenu1" class="dropdown-menu" id="invertLineWorlds"><li><a>1x1</a></li><li><a>4x4</a></li><li><a>3x6</a></li><li><a>7x7</a></li><li><a>8x8</a></li></ul></div></div><canvas class="ideCanvas" id="invertLineCanvas"></canvas></div></div></div><div style="width:100%;"><div class="buttonBar"><button class="btn btn-default" id="invertLineRunButton"><span class="glyphicon glyphicon-play"></span> Programm ausführen</button></div></div><script>
+
+        
+
+function exampleinvertLine() {
+STARTER_CODE = `
+
+import stanford.karel.*;
+public class InverConoS extends Karel {
+   /** Starten Sie hier die Ausführung */
+   public void run() {
+      while(frontIsClear()) {
+         cono();
+         move();
+      }
+      /* um einen Fencepost Bug zu verhindern */
+      cono();
+   }
+
+   /*  holt einen beeper wenn einer vorhanden ist, legt e
+    * inen beeper ansonsten */
+   public void cono() {
+      /* eine if / else-Anweisung */
+      if(beepersPresent()) {
+         pickBeeper();
+      } else {
+         putBeeper();
+      }
+   }
+}
+`
+// because of that extra endline at the start of the string
+STARTER_CODE = STARTER_CODE.trim();
+
+ var karelIde = null;
+ var karelEditor = null;
+ var buttonState = 'play';
+
+ function main() {
+   karelEditor = importEditorCode('invertLineEditor','invertLineEditorDiv', STARTER_CODE, true);
+    setupWorldDropdown();
+    
+    
+    var canvas = document.getElementById('invertLineCanvas');
+    karelIde = KarelIde(karelEditor, canvas, 'invert', 0.0);
+    $('#invertLineRunButton').click(function(){playClicked()});
+    onresize();
+    
+ }
+
+ function setupWorldDropdown() {
+    console.log('setup world dropdown')
+    let ul = document.getElementById('invertLineWorlds')
+    
+    if (!ul.childNodes || ul.childNodes.length == 0) return;
+
+    // Iterate LIs
+    for (var itemi=0;itemi<ul.childNodes.length;itemi++) {
+        var li = ul.childNodes[itemi];
+        if(li.nodeName == "LI") {
+          var a = li.childNodes[0]
+          let worldName = a.innerHTML;
+          console.log(worldName)
+          a.onclick = () => setWorld(worldName);
+
+        }
+    }
+ }
+
+ function setWorld(worldName){
+    console.log('here we go', worldName)
+    karelIde.changeWorld(worldName)
+    changeToPlayButton()
+ }
+
+ function playClicked() {
+  if(buttonState == 'play') {
+    karelIde.playButton();
+    changeToResetButton();
+   } else if (buttonState == 'reset') {
+    karelIde.stopButton();
+    changeToPlayButton();
+   }
+  }
+
+  function changeToPlayButton() {
+    var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
+    $('#invertLineRunButton').html(playText);
+    buttonState = 'play';
+  }
+
+  function changeToResetButton() {
+    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
+    $('#invertLineRunButton').html(resetText);
+    buttonState = 'reset';  
+  }
+
+ function onresize() { 
+    var parentHeight = 404.8;
+    var canvasWidth = 300
+    var parentWidth = $("#invertLine").width();
+    console.log('pw: ' + parentWidth);
+
+    var ide = document.getElementById('invertLineIde');
+    var editorDiv = document.getElementById('invertLineEditorDiv');
+    var canvas = document.getElementById('invertLineCanvasDiv');
+    
+    var ideHeight = parentHeight
+    var centerHeight = ideHeight;
+
+    var availibleWidth = parentWidth;
+    var elementSpacing = 12;
+
+    var editorWidth = availibleWidth - canvasWidth - elementSpacing; 
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasWidth + 'px';
+    canvas.style.left = (editorWidth + elementSpacing) + 'px';
+
+
+
+    editorDiv.style.left = 0 + 'px'
+    editorDiv.style.width = editorWidth + 'px';
+    editorDiv.style.height = parentHeight + 'px';
+    console.log('editor width: ' + editorWidth)
+
+    if (karelEditor) {
+       karelEditor.renderer.onResize();
+    }
+ }
+ main()
+ 
+}
+exampleinvertLine();
+    </script></div>
+
+
+<p> Beachten Sie, dass eine <code>if</code> Anweisung keinen <code>else</code> Block enthalten muss. In diesem Fall funktioniert die Anweisung wie eine <code>while</code> Schleife, die nur einmal ausgeführt wird: </p><p class="demoCode"><code><span class="keyword">if</span>(</code><i class="demoText">test</i><code>){</code><br/><i class="demoText" style="margin-left:2em">wenn Codeblock</i><br/><code>}</code></p><h3> Bedingungen </h3><p> Das letzte Beispiel verwendete eine neue Bedingung. Hier ist eine Liste aller Bedingungen, die Karel kennt: </p><p><table class="table table-condensed"><tr><th> Prüfung </th><th> Gegenteil </th><th> Was prüft es? </th></tr><tr><td><code>vorneIstKlar()</code></td><td><code>frontIstBlockiert()</code></td><td> Gibt es eine Wand vor Karel? </td></tr><tr><td><code>piepserVorhanden()</code></td><td><code>keinePiepserVorhanden()</code></td><td> Gibt es an dieser Ecke Piepser? </td></tr><tr><td><code>linksIstKlar()</code></td><td><code>leftIstBlockiert()</code></td><td> Gibt es eine Mauer zu Karels Linken? </td></tr><tr><td><code>richtigIstKlar()</code></td><td><code>rechtIstBlockiert()</code></td><td> Gibt es eine Wand zu Karels Recht? </td></tr><tr><td><code>piepserInDerTasche()</code></td><td><code>keinePiepserInDerTasche()</code></td><td> Gibt es Piepser in Karels Tasche? </td></tr><!-- dirs --><tr><td><code>nachNordenAusgerichtet()</code></td><td><code>nichtNachNordenGerichtet()</code></td><td> Ist Karel nach Norden ausgerichtet? </td></tr><tr><td><code>nachSüdenAusgerichtet()</code></td><td><code>nichtNachSüdenAusgerichtet()</code></td><td> Ist Karel nach Süden ausgerichtet? </td></tr><tr><td><code>nachOstenGerichtet()</code></td><td><code>nichtNachOstenGerichtet()</code></td><td> Ist Karel nach Osten gerichtet? </td></tr><tr><td><code>nachWestenGerichtet()</code></td><td><code>nichtNachWestenGerichtet()</code></td><td> Ist Karel nach Westen ausgerichtet? </td></tr></table></p><h3> Alles zusammenstellen </h3><p> Glückwunsch! Sie kennen jetzt alle Kernsteuerungsblöcke für die Programmierung. Während Sie sie mit Karel, Methoden, Schleifen, für Schleifen gelernt haben, funktionieren die if / else -Anweisungen in fast allen Hauptsprachen, einschließlich Java, auf dieselbe Weise. </p><p> Nun, da Sie die Bausteine haben, können Sie sie zusammensetzen, um Lösungen für immer komplexere Probleme zu erstellen. Programmieren ist weitgehend die Wissenschaft der Problemlösung am Computer. Da Probleme häufig schwierig sind, können auch Lösungen - und die Programme, die diese Lösungen implementieren - schwierig sein. Um Ihnen die Entwicklung dieser Lösungen zu erleichtern, müssen Sie eine Methodik und eine Disziplin anwenden, die die Komplexität auf ein überschaubares Maß reduziert. </p><hr/><center><a class="btn btn-primary btn-lg" href="chapter8.html" role="button">Nächstes Kapitel</a></center>
+
+
+
+
+
+<div style="height:60px"></div>
+<!-- <div class="footer">
+	<p class="pull-left">
+		&#169; Stanford 2018 &#124; Made by Chris Piech. Built off "Karel the Robot Learns Java" by Eric Roberts. 
+	</p>
+</div>-->
+<!-- <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-74362126-1', 'auto');
+  ga('send', 'pageview');
+
+</script>--></div></div></div><!-- right gutter --><div style="flex-grow:4"></div></div></div></body></html>

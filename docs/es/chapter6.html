@@ -1,18 +1,114 @@
-<html><head>
-<title> Lector de karel </title><meta content="text/html; charset=utf-8" http-equiv="Content-Type"/><script src="../plugins/jquery.min.js"></script><link href="../plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/><script src="../plugins/bootstrap/js/bootstrap.min.js"></script><link href="../style.css" rel="stylesheet"/><script src="..//karel/js/html/websiteImports.js"></script><script>importCss();</script><script>importJs();</script></head><body><!-- container --><div class="bookContainer">
-<!-- side bar --><div class="bookSideBar"><div class="homeLink"><a href="../es/intro.html"><span aria-hidden="true" class="glyphicon glyphicon-home"></span> Karel</a></div><hr/>
+
+<html>
+<head>
+
+<title>Lector Karel</title>
+<meta content="text/html; charset=utf-8" http-equiv="Content-Type"/> 
+<script src="../plugins/jquery.min.js"></script>
+<link href="../plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet"/> 
+<script src="../plugins/bootstrap/js/bootstrap.min.js"></script>
+<link href="../style.css" rel="stylesheet"/> 
+<script src="..//karel/js/html/websiteImports.js"></script>
+<script>importCss();</script>
+<script>importJs();</script>
+</head>
+<body>
+<!-- container -->
+<div class="bookContainer">
+
+<!-- side bar -->
+<div class="bookSideBar">
+<div class="homeLink">
+ <a href="../es/intro.html">
+<span aria-hidden="true" class="glyphicon glyphicon-home"></span> Karel</a> 
+</div>
+<hr/>
+<div class="chapterTab" onclick="location.href='../es/chapter1.html'">
+<a class="bookLink btn btn-link" href="../es/chapter1.html">1 - Cumplir Karel</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../es/chapter2.html'">
+<a class="bookLink btn btn-link" href="../es/chapter2.html">2 - Programación</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../es/chapter3.html'">
+<a class="bookLink btn btn-link" href="../es/chapter3.html">3 - Nuevos métodos</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../es/chapter4.html'">
+<a class="bookLink btn btn-link" href="../es/chapter4.html">4 - Descomposición</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../es/chapter5.html'">
+<a class="bookLink btn btn-link" href="../es/chapter5.html">5 - Ciclos For</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../es/chapter6.html'">
+<a class="bookLink btn btn-link" href="../es/chapter6.html">6 - Ciclos While</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../es/chapter7.html'">
+<a class="bookLink btn btn-link" href="../es/chapter7.html">7 - Condicionales</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../es/chapter8.html'">
+<a class="bookLink btn btn-link" href="../es/chapter8.html">8 - Refinamiento</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../es/chapter9.html'">
+<a class="bookLink btn btn-link" href="../es/chapter9.html">9 - Super Karel</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../es/reference.html'">
+<a class="bookLink btn btn-link" href="../es/reference.html">10 - Referencia</a> 
+</div>
+<div class="chapterTab" onclick="location.href='../es/ide.html'">
+<a class="bookLink btn btn-link" href="../es/ide.html">11 - Código</a> 
+</div>
+<hr/>
+ <a href="../"><img src="../images/unFlag.png" style="width:40px"/> Aprende más</a> 
+<!-- <center>
+    <img style ="width:75px;" src="../images/stanford.png"/> 
+    </center> -->
+</div>
+<!-- content -->
+<div class="bookContent" style="display: flex;">
+<!-- right gutter -->
+<div style="flex-grow:1;max-width:50px;"></div>
+<!-- main stuff -->
+<div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px">
+<div class="row">
+<div class="col-md-12 col-xs-12">
 
 
-<div class="chapterTab"><a class="bookLink btn btn-link" href="../es/chapter1.html">1 - Conoce a Karel</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../es/chapter2.html">2 - Programación</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../es/chapter3.html">3 - Nuevos métodos</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../es/chapter4.html">4 - Descomposición</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../es/chapter5.html">5 - Ciclos for</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../es/chapter6.html">6 - Ciclos while</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../es/chapter7.html">7 - Condicionales</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../es/chapter8.html">8 - Refinamiento</a></div><div class="chapterTab"><a class="bookLink btn btn-link" href="../es/chapter10.html">9 - SuperKarel</a></div>
-<div class="chapterTab"><a class="bookLink btn btn-link" href="../es/reference.html">10 - Referencia</a></div><!-- <center>
-    <img style ="width:75px;" src="../images/stanford.png"/>
-    </center>--></div><!-- content --><div class="bookContent" style="display: flex;"><!-- right gutter --><div style="flex-grow:1;max-width:50px;"></div><!-- main stuff --><div class="" style="flex-basis:740px; max-width:740px; margin-left:20px; margin-right:20px"><div class="row"><div class="col-md-12 col-xs-12">
-
-<h1> Capítulo 6: Ciclos "while" </h1><hr/><p> La técnica de definir nuevos métodos y definir los ciclos, por más útiles que sean, en realidad no permite que Karel resuelva ningún problema nuevo. Cada vez que ejecutas un programa, siempre hace exactamente lo mismo. Los programas se vuelven mucho más útiles cuando pueden responder de manera diferente a diferentes entradas. </p><p> Como ejemplo. Digamos que querías escribir un programa para tener a Karel moverse en una pared. Pero no solo desea que este programa funcione en un mundo con un tamaño fijo. Te gustaría escribir un solo programa que podría funcionar en cualquier mundo. </p>
+<h1>Capítulo 6: Ciclos While</h1>
+<hr/>
+<p>La técnica de definir nuevos métodos y definir ciclos for , por muy útiles que sean, no permite en realidad que Karel resuelva ningún problema nuevo. Cada vez que haces run un programa, siempre hace exactamente lo mismo. Los programas se vuelven mucho más útiles cuando pueden responder de manera diferente a diferentes entradas.</p>
+<p>Como ejemplo. Digamos que desea escribir un programa para tener Karel moverse en una pared. Pero no solo desea que este programa funcione en un mundo con un tamaño fijo. Te gustaría escribir un solo programa que podría funcionar en cualquier mundo.</p>
 
 
 
-<div class="section embeddedIde" id="moveToWall"><div class="ide getStarted" id="moveToWallIde" style="height:352.0px"><div class="ideCenter" id="moveToWallIdeCenter"><div class="ideEditorDiv" id="moveToWallEditorDiv" style="width:200px"></div><div class="ideCanvasDiv" id="moveToWallCanvasDiv"><div class="worldDropdown"><div class="dropdown"><button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">Cambiar el mundo <span class="caret"></span></button><ul aria-labelledby="dropdownMenu1" class="dropdown-menu" id="moveToWallWorlds"><li><a>1x1</a></li><li><a>4x4</a></li><li><a>3x6</a></li><li><a>7x7</a></li><li><a>8x8</a></li></ul></div></div><canvas class="ideCanvas" id="moveToWallCanvas"></canvas></div></div></div><div style="width:100%;"><div class="buttonBar"><button class="btn btn-default" id="moveToWallRunButton"><span class="glyphicon glyphicon-play"></span> Ejecute el programa</button></div></div><script>
+
+
+<div class="section embeddedIde" id="moveToWall">
+<div class="ide getStarted" id="moveToWallIde" style="height:352.0px">
+<div class="ideCenter" id="moveToWallIdeCenter">
+<div class="ideEditorDiv" id="moveToWallEditorDiv" style="width:200px"></div>
+<div class="ideCanvasDiv" id="moveToWallCanvasDiv">
+<div class="worldDropdown">
+<div class="dropdown">
+<button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">Cambiar mundo<span class="caret"></span>
+</button>
+<ul aria-labelledby="dropdownMenu1" class="dropdown-menu" id="moveToWallWorlds">
+<li><a>1x1</a> </li>
+<li><a>4x4</a> </li>
+<li><a>3x6</a> </li>
+<li><a>7x7</a> </li>
+<li><a>8x8</a> </li>
+</ul>
+</div>
+</div>
+<canvas class="ideCanvas" id="moveToWallCanvas"></canvas>
+</div>
+</div>
+</div>
+<div style="width:100%;">
+<div class="buttonBar">
+<button class="btn btn-default" id="moveToWallRunButton"><span class="glyphicon glyphicon-play"></span>Ejecute el programa</button>
+</div>
+</div>
+<script>
 
         
 
@@ -20,20 +116,20 @@ function examplemoveToWall() {
 STARTER_CODE = `
 
 /*
- * Archivo: MoverALaPared.java
- * ---------------------------
- * Utiliza un ciclo "while" para moverser a Karel hasta
- * que toque una pared. Funciona en un mundo de cualquier
- * tamaño.
+ * Archivo: MoverseAPared.java
+ * --------------------------
+ * Usa un "while" ciclo a moverserse Karel hasta que toq
+ * ue una pared. Funciona en cualquier mundo del tama
+ * ño.
  */
 import stanford.karel.*;
-public class MoverALaPared extends Karel {
+public class MoverseAPared extends Karel {
    public void run() {
-      moverALaPared();
+      moverseAPared();
    }
 
    /* Este es un método muy útil. */
-   private void moverALaPared() {
+   private void moverseAPared() {
       while(frenteDespejado()) {
          moverse();
       }
@@ -53,7 +149,7 @@ STARTER_CODE = STARTER_CODE.trim();
     
     
     var canvas = document.getElementById('moveToWallCanvas');
-    karelIde = KarelIde(karelEditor, canvas, '7x7', 0.0);
+    karelIde = KarelIde(karelEditor, canvas, '7x7', 0.0, 'es');
     $('#moveToWallRunButton').click(function(){playClicked()});
     onresize();
     
@@ -95,13 +191,13 @@ STARTER_CODE = STARTER_CODE.trim();
   }
 
   function changeToPlayButton() {
-    var playText = '<span class="glyphicon glyphicon-play"></span> Ejecute el programa';
+    var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
     $('#moveToWallRunButton').html(playText);
     buttonState = 'play';
   }
 
   function changeToResetButton() {
-    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reinicia el programa';
+    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
     $('#moveToWallRunButton').html(resetText);
     buttonState = 'reset';  
   }
@@ -143,12 +239,55 @@ STARTER_CODE = STARTER_CODE.trim();
  
 }
 examplemoveToWall();
-    </script></div>
-<p> Intenta cambiar el mundo haciendo clic en el menú desplegable &quot;Cambiar mundo&quot; que se encuentra sobre el mundo. Para cualquier mundo de tamaño, Karel se moverá hasta que toque una pared. Tenga en cuenta que esta hazaña no se puede lograr utilizando un ciclo <code class="keyword">for</code>. Eso nos obligaría a saber el tamaño del mundo en el momento de la programación. </p><h3> Ciclo "while" basico </h3><p> En Karel, un <code class="keyword">while</code> de ciclo se utiliza para repetir un cuerpo de código <i>como-largo como</i> una condición dada se mantiene. El ciclo while tiene la siguiente forma general: </p><p class="demoCode"><code><span class="keyword">while</span>(</code><i class="demoText">prueba</i><code>){</code><br/><i class="demoText" style="margin-left:2em">declaraciones a repetir</i><br/><code>}</code></p><p> El flujo de control de un ciclo while es el siguiente. Cuando el programa llega a un ciclo while, comienza a repetir un proceso en el que primero <i>verifica</i> si la prueba pasa y, si es así, <i>ejecuta</i> el código en el cuerpo. </p> <p>Cuando el programa <i>verifica</i> si la prueba pasa, decide si la <i class="demoText">prueba</i> es verdadera para el estado actual del mundo. Si es así, el ciclo ejecutará el código en el cuerpo. Si la prueba falla, el ciclo termina y el programa continúa.</p> <p> Cuando el programa <i>ejecuta</i> el cuerpo del ciclo, el programa ejecuta las líneas en el cuerpo una a la vez. Cuando el programa llega al final del ciclo while, salta de nuevo a la parte superior del ciclo. A continuación, vuelve a comprobar la prueba, continuando en ciclo si pasa. El programa no sale del ciclo hasta que llega a una comprobación y la prueba falla. </p><p> Karel tiene muchas declaraciones de <i class="demoText">prueba</i>, y las analizaremos todas en el siguiente capítulo. Por ahora vamos a usar una sola declaración de prueba: <code>frenteDespejado()</code> que es verdadera si no hay un muro directamente enfrente de Karel. </p><h3> Fencepost Bug </h3><p> Modifiquemos nuestro programa de arriba para hacerlo más interesante. En lugar de solo moverte a una pared, haz que Karel coloque una línea de bocinas, una en cada casilla. Una vez más queremos que este programa funcione para un mundo de cualquier tamaño: </p>
+    </script>
+</div>
+
+<p>Intenta cambiar el mundo haciendo clic en el menú desplegable "Cambiar mundo" que se encuentra sobre el mundo. Para un mundo de cualquier tamaño, Karel será moverse hasta que toque una pared. Tenga en cuenta que esta hazaña no se puede lograr utilizando un <code class="keyword">for</code> ciclo . Eso nos obligaría a saber el tamaño del mundo en el momento de la programación.</p>
+<h3>Basic While Loop</h3>
+<p>En Karel , un <code class="keyword">while</code> ciclo se usa para repetir un cuerpo de código<i>Mientras</i>una condición dada se mantiene. El ciclo while tiene la siguiente forma general:</p>
+<p class="demoCode">
+ <code><span class="keyword">while</span>(</code> <i class="demoText">prueba</i> <code>){</code> <br/>
+<i class="demoText" style="margin-left:2em">declaraciones a repetir</i><br/>
+ <code>}</code> 
+</p>
+<p>El flujo de control de un ciclo while es el siguiente. Cuando el programa llega a ciclo while comienza a repetir un proceso en el que primero<i>cheques</i>Si la prueba pasa, y si es así.<i>run s</i>El código en el cuerpo.</p>Cuando el programa<i>cheques</i>Si la prueba pasa, decide si el<i class="demoText">prueba</i>Es cierto para el estado actual del mundo. Si es así, el ciclo tendrá el código run en el cuerpo. Si la prueba falla, el ciclo ha terminado y el programa moverse s está moverse .
+<p>Cuando el programa<i>run s</i>El cuerpo del ciclo , el programa ejecuta las líneas en el cuerpo de una en una. Cuando el programa llega al final de la ciclo while , salta de nuevo a la parte superior de la ciclo . A continuación, vuelve a comprobar la prueba, continuando a ciclo si pasa. El programa no sale del ciclo hasta que llega a una verificación y la prueba falla.</p>
+<p>Karel tiene muchos<i class="demoText">prueba</i>declaraciones, y vamos a repasar todos ellos en el siguiente capítulo. Por ahora vamos a utilizar una sola declaración de prueba: <code>frenteDespejado()</code> lo cual es cierto si no hay una pared directamente Karel de Karel .</p>
+<h3>Fencepost Bug</h3>
+<p>Modifiquemos nuestro programa de arriba para hacerlo más interesante. En lugar de simplemente Karel a una pared, Karel que Karel coloque una línea de conos , una en cada casilla. Una vez más queremos que este programa funcione para un mundo de cualquier tamaño:</p>
 
 
 
-<div class="section embeddedIde" id="beeperLineBug1"><div class="ide getStarted" id="beeperLineBug1Ide" style="height:369.6px"><div class="ideCenter" id="beeperLineBug1IdeCenter"><div class="ideEditorDiv" id="beeperLineBug1EditorDiv" style="width:200px"></div><div class="ideCanvasDiv" id="beeperLineBug1CanvasDiv"><div class="worldDropdown"><div class="dropdown"><button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">Cambiar el mundo <span class="caret"></span></button><ul aria-labelledby="dropdownMenu1" class="dropdown-menu" id="beeperLineBug1Worlds"><li><a>1x1</a></li><li><a>4x4</a></li><li><a>3x6</a></li><li><a>7x7</a></li><li><a>8x8</a></li></ul></div></div><canvas class="ideCanvas" id="beeperLineBug1Canvas"></canvas></div></div></div><div style="width:100%;"><div class="buttonBar"><button class="btn btn-default" id="beeperLineBug1RunButton"><span class="glyphicon glyphicon-play"></span> Ejecute el programa</button></div></div><script>
+
+
+<div class="section embeddedIde" id="beeperLineBug1">
+<div class="ide getStarted" id="beeperLineBug1Ide" style="height:369.6px">
+<div class="ideCenter" id="beeperLineBug1IdeCenter">
+<div class="ideEditorDiv" id="beeperLineBug1EditorDiv" style="width:200px"></div>
+<div class="ideCanvasDiv" id="beeperLineBug1CanvasDiv">
+<div class="worldDropdown">
+<div class="dropdown">
+<button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">Cambiar mundo<span class="caret"></span>
+</button>
+<ul aria-labelledby="dropdownMenu1" class="dropdown-menu" id="beeperLineBug1Worlds">
+<li><a>1x1</a> </li>
+<li><a>4x4</a> </li>
+<li><a>3x6</a> </li>
+<li><a>7x7</a> </li>
+<li><a>8x8</a> </li>
+</ul>
+</div>
+</div>
+<canvas class="ideCanvas" id="beeperLineBug1Canvas"></canvas>
+</div>
+</div>
+</div>
+<div style="width:100%;">
+<div class="buttonBar">
+<button class="btn btn-default" id="beeperLineBug1RunButton"><span class="glyphicon glyphicon-play"></span>Ejecute el programa</button>
+</div>
+</div>
+<script>
 
         
 
@@ -156,22 +295,22 @@ function examplebeeperLineBug1() {
 STARTER_CODE = `
 
 /*
- * Archivo: ErrorEnLaFilaDeConos.java
- * ------------------------------------
- * Utiliza un ciclo "while" para colocar una fila
- * de conos. Este programa funciona para un mundo de
- * cualquier tamaño. Sin embargo, dado que cada mundo
- * requiere un movimiento menos que el numero de conos,
- * siempre pierde un cono.
+ * Archivo: ConoErrorDeLínea.java
+ * -----------------------------
+ * Utiliza un ciclo while para colocar una línea de c
+ * onos . Este programa funciona para un mundo de cua
+ * lquier tamaño. Sin embargo, debido a que cada mund
+ * o requiere uno menos moverserse s que ponerCono s, si
+ * empre se pierde un cono .
  */
 import stanford.karel.*;
-public class ErrorEnLaFilaDeConos extends Karel {
+public class ConoErrorDeLínea extends Karel {
    public void run() {
-   	  /* Se repite hasta que Karel se enfrenta a una pared. */
+   	  /* Se repite hasta karel frente a una pared. */
       while(frenteDespejado()) {
-      	 /* colocar un cono en la esquina actual */ 
+      	 /* coloca un cono en la plaza actual */ 
          ponerCono();
-      	 /* moverse a la siguiente esquina */
+      	 /* moverse al siguiente cuadrado */
          moverse();
       }
    }
@@ -190,7 +329,7 @@ STARTER_CODE = STARTER_CODE.trim();
     
     
     var canvas = document.getElementById('beeperLineBug1Canvas');
-    karelIde = KarelIde(karelEditor, canvas, '7x7', 0.0);
+    karelIde = KarelIde(karelEditor, canvas, '7x7', 0.0, 'es');
     $('#beeperLineBug1RunButton').click(function(){playClicked()});
     onresize();
     
@@ -232,13 +371,13 @@ STARTER_CODE = STARTER_CODE.trim();
   }
 
   function changeToPlayButton() {
-    var playText = '<span class="glyphicon glyphicon-play"></span> Ejecute el programa';
+    var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
     $('#beeperLineBug1RunButton').html(playText);
     buttonState = 'play';
   }
 
   function changeToResetButton() {
-    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reinicia el programa';
+    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
     $('#beeperLineBug1RunButton').html(resetText);
     buttonState = 'reset';  
   }
@@ -280,12 +419,49 @@ STARTER_CODE = STARTER_CODE.trim();
  
 }
 examplebeeperLineBug1();
-    </script></div>
-<p> Eso se ve genial. Excepto por un problema. En todos los mundos, Karel no coloca un cono en la última casilla de la línea (mira detenidamente). Cuando Karel está en la última casilla, el programa no ejecuta el cuerpo del ciclo porque la prueba ya no pasa, Karel se enfrenta a una pared. Puede sentirse tentado de intentar cambiar el orden del cuerpo para que Karel se mueva antes de colocar un cono. El código es editable así que ¡pruébalo! </p><p> Hay un problema más profundo que ninguna reorganización del cuerpo puede resolver. Para el mundo con 7 columnas, Karel necesita poner 7 conos, pero solo debe moverse 6 veces. Dado que el ciclo while ejecuta ambas líneas cuando pasa una prueba, ¿cómo puede hacer que el programa ejecute un comando una vez más que el otro? </p><p> El error en este programa es un ejemplo de un problema de programación llamado <b>error de poste de valla</b>. El nombre proviene del hecho de que si desea construir una cerca hecha de paneles que tengan un poste de cerca en cualquiera de los tamaños, el número de mensajes de cerca siempre es uno mayor que el número de paneles. ¿Cuántos postes de la cerca, por ejemplo, necesitas construir una cerca con 10 paneles? La respuesta es 11, como se ilustra en el siguiente diagrama: </p><center><img src="../images/ch6/fencepost.png" style="width:500px;margin-bottom:10px"/></center><p> Una vez que lo descubres, arreglar este error es bastante fácil. Antes de que Karel se detenga en el fin del mundo, todo lo que el programa debe hacer es colocar un cono final: </p>
+    </script>
+</div>
+
+<p>Eso se ve genial. Excepto por un problema. En todos los mundos, Karel no coloca un cono en el último cuadrado de la línea (observe detenidamente). Cuando Karel está en el último cuadrado, el programa no ejecuta el cuerpo del ciclo porque la prueba ya no pasa, Karel se enfrenta a una pared. Puede tener la tentación de intentar cambiar el orden del cuerpo de modo que Karel moverse s antes de colocar un beeer. El código es editable así que ¡pruébalo!</p>
+<p>Hay un problema más profundo que ninguna reorganización del cuerpo puede resolver. Para el mundo con 7 columnas, Karel necesita colocar 7 conos , pero solo debería moverse 6 veces. Dado que el ciclo while ejecuta ambas líneas cuando pasa una prueba, ¿cómo puede hacer que el programa ejecute un comando una vez más que el otro?</p>
+<p>El error en este programa es un ejemplo de un problema de programación llamado <b>error del poste</b> . El nombre proviene del hecho de que si desea construir una cerca hecha de paneles que tengan un poste de cerca en cualquiera de los tamaños, el número de mensajes de cerca siempre es uno mayor que el número de paneles. ¿Cuántos postes de la cerca, por ejemplo, necesitas construir una cerca con 10 paneles? La respuesta es 11, como se ilustra en el siguiente diagrama:</p>
+<center>
+<img src="../images/ch6/fencepost.png" style="width:500px;margin-bottom:10px"/> 
+</center>
+<p>Una vez que lo descubres, arreglar este error es bastante fácil. Antes de que Karel detenga en el fin del mundo, todo lo que el programa tiene que hacer es colocar un final cono :</p>
 
 
 
-<div class="section embeddedIde" id="beeperLine"><div class="ide getStarted" id="beeperLineIde" style="height:369.6px"><div class="ideCenter" id="beeperLineIdeCenter"><div class="ideEditorDiv" id="beeperLineEditorDiv" style="width:200px"></div><div class="ideCanvasDiv" id="beeperLineCanvasDiv"><div class="worldDropdown"><div class="dropdown"><button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">Cambiar el mundo <span class="caret"></span></button><ul aria-labelledby="dropdownMenu1" class="dropdown-menu" id="beeperLineWorlds"><li><a>1x1</a></li><li><a>4x4</a></li><li><a>3x6</a></li><li><a>7x7</a></li><li><a>8x8</a></li></ul></div></div><canvas class="ideCanvas" id="beeperLineCanvas"></canvas></div></div></div><div style="width:100%;"><div class="buttonBar"><button class="btn btn-default" id="beeperLineRunButton"><span class="glyphicon glyphicon-play"></span> Ejecute el programa</button></div></div><script>
+
+
+<div class="section embeddedIde" id="beeperLine">
+<div class="ide getStarted" id="beeperLineIde" style="height:369.6px">
+<div class="ideCenter" id="beeperLineIdeCenter">
+<div class="ideEditorDiv" id="beeperLineEditorDiv" style="width:200px"></div>
+<div class="ideCanvasDiv" id="beeperLineCanvasDiv">
+<div class="worldDropdown">
+<div class="dropdown">
+<button aria-expanded="true" aria-haspopup="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">Cambiar mundo<span class="caret"></span>
+</button>
+<ul aria-labelledby="dropdownMenu1" class="dropdown-menu" id="beeperLineWorlds">
+<li><a>1x1</a> </li>
+<li><a>4x4</a> </li>
+<li><a>3x6</a> </li>
+<li><a>7x7</a> </li>
+<li><a>8x8</a> </li>
+</ul>
+</div>
+</div>
+<canvas class="ideCanvas" id="beeperLineCanvas"></canvas>
+</div>
+</div>
+</div>
+<div style="width:100%;">
+<div class="buttonBar">
+<button class="btn btn-default" id="beeperLineRunButton"><span class="glyphicon glyphicon-play"></span>Ejecute el programa</button>
+</div>
+</div>
+<script>
 
         
 
@@ -293,19 +469,20 @@ function examplebeeperLine() {
 STARTER_CODE = `
 
 /*
- * Archivo: FilaDeConos.java
- * ---------------------------
- * Utiliza un ciclo "while" para colocar una fila
- * de conos. Este programa funciona para un mundo de cualquier tamaño.
+ * Archivo: ConoLinea.java
+ * ----------------------
+ * Utiliza un "while" ciclo para colocar una línea de
+ * conos . Este programa funciona para un mundo de c
+ * ualquier tamaño.
  */
 import stanford.karel.*;
-public class FilaDeConos extends Karel {
+public class ConoLinea extends Karel {
    public void run() {
-      /* Se repite hasta que Karel se enfrenta a una pared. */
+      /* Se repite hasta karel frente a una pared. */
       while(frenteDespejado()) {
-         /* colocar un cono en la esquina actual */ 
+         /* coloca un cono en la plaza actual */ 
          ponerCono();
-         /* moverse a la siguiente esquina */
+         /* moverse al siguiente cuadrado */
          moverse();
       }
       /* resuelve el error del poste de la cerca */
@@ -326,7 +503,7 @@ STARTER_CODE = STARTER_CODE.trim();
     
     
     var canvas = document.getElementById('beeperLineCanvas');
-    karelIde = KarelIde(karelEditor, canvas, '7x7', 0.8);
+    karelIde = KarelIde(karelEditor, canvas, '7x7', 0.8, 'es');
     $('#beeperLineRunButton').click(function(){playClicked()});
     onresize();
     
@@ -368,13 +545,13 @@ STARTER_CODE = STARTER_CODE.trim();
   }
 
   function changeToPlayButton() {
-    var playText = '<span class="glyphicon glyphicon-play"></span> Ejecute el programa';
+    var playText = '<span class="glyphicon glyphicon-play"></span> Run Program';
     $('#beeperLineRunButton').html(playText);
     buttonState = 'play';
   }
 
   function changeToResetButton() {
-    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reinicia el programa';
+    var resetText = '<span class="glyphicon glyphicon-repeat"></span> Reset Program';
     $('#beeperLineRunButton').html(resetText);
     buttonState = 'reset';  
   }
@@ -416,23 +593,22 @@ STARTER_CODE = STARTER_CODE.trim();
  
 }
 examplebeeperLine();
-    </script></div><hr/><center><a class="btn btn-primary btn-lg" href="chapter7.html" role="button">Siguiente capítulo</a></center>
+    </script>
+</div><hr/>
+<center>
+<a class="btn btn-primary btn-lg" href="chapter7.html" role="button">Siguiente capítulo</a> 
+</center>
+
 
 
 
 <div style="height:60px"></div>
-<!-- <div class="footer">
-	<p class="pull-left">
-		&#169; Stanford 2018 &#124; Made by Chris Piech. Built off "Karel the Robot Learns Java" by Eric Roberts. 
-	</p>
-</div>-->
-<!-- <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-74362126-1', 'auto');
-  ga('send', 'pageview');
-
-</script>--></div></div></div><!-- right gutter --><div style="flex-grow:4"></div></div></div></body></html>
+</div>
+</div>
+</div>
+<!-- right gutter -->
+<div style="flex-grow:4"></div>
+</div>
+</div>
+</body>
+</html>
