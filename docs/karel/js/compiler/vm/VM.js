@@ -73,8 +73,10 @@ VM.prototype.reset = function() {
 
 VM.prototype.compile = function(exp, code) {
    if (exp instanceof Array) {
-      var fn = exp[0];
+      var fn = exp[0]
       var op = this.operators[fn];
+      console.log(fn)
+      console.log(op)
       if (!op) throw new Error("Undefined operator \"" + fn + "\"");
       op.compile(this, exp, code);
    } else {

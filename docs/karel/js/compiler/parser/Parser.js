@@ -139,12 +139,30 @@ Parser.prototype.nextToken = function() {
    return this.scanner.nextToken();
 };
 
+Parser.prototype.peekNext = function() {
+   let nextToken = this.nextToken()
+   this.saveToken(nextToken)
+   return nextToken;
+}
+
+Parser.prototype.nextTokenIndentLevel = function() {
+   return this.scanner.nextTokenIndentLevel();
+}
+
 Parser.prototype.saveToken = function(token) {
    this.scanner.saveToken(token);
 };
 
 Parser.prototype.verifyToken = function(expected) {
    return this.scanner.verifyToken(expected);
+};
+
+Parser.prototype.verifyNewline = function(expected) {
+   return this.scanner.verifyNewline(expected);
+};
+
+Parser.prototype.hasMoreTokens = function() {
+   return this.scanner.hasMoreTokens();
 };
 
 /*

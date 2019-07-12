@@ -9,7 +9,9 @@
  * that Karel doesn't try to render before images have been
  * loaded.
  */
-function KarelIde(editor, canvas, initialWorld, speed = 0.5, lang="es", canvasWidth = 1000, canvasHeight=1000) {
+function KarelIde(programLang="java", editor, canvas, initialWorld, speed = 0.5, lang="es", canvasWidth = 1000, canvasHeight=1000) {
+
+  let PATH_TO_ROOT = '../../'
 
    function calcHeartbeatsForSpeed(speed) {
     zeroHb = 80;
@@ -247,7 +249,13 @@ function KarelIde(editor, canvas, initialWorld, speed = 0.5, lang="es", canvasWi
    }
 
    function getCompiler() {
-       if (Const.USE_COMPILER) return KarelCompiler(karel);
+       if (Const.USE_COMPILER) {
+        if(programLang == 'python') {
+          return KarelPythonCompiler(karel)
+        } 
+        // default to Java
+        return KarelJavaCompiler(karel);
+      }
        return KarelEvalEngine(karel);
     }
 
@@ -308,7 +316,7 @@ function KarelIde(editor, canvas, initialWorld, speed = 0.5, lang="es", canvasWi
       } else if (worldName == '7x7.w') {
          worldFileLoaded('Dimension: (7,7)');
       }else {
-         var url = "../karel/worlds/" + worldName;
+         var url = PATH_TO_ROOT + "/karel/worlds/" + worldName;
          loadDoc(url, worldFileLoaded);
       }
    }

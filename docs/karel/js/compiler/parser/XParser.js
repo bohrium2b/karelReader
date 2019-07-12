@@ -54,11 +54,9 @@ XParser.prototype.prefixOperator = function(parser, op) {
 }
 
 XParser.prototype.infixOperator = function(parser, op, lhs) {
-   console.log('test')
-   console.log(parser)
-   console.log(op)
-   assert(false)
-   return [op, lhs, parser.readE(parser.infixProperties[op].prec)];
+   let opName = op.text;
+   let properties = parser.infixProperties[opName]
+   return [opName, lhs, parser.readE(properties.prec)];
 };
 
 XParser.prototype.suffixOperator = function(parser, op, lhs) {

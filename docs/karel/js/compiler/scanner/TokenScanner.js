@@ -37,6 +37,7 @@ function TokenScanner(str) {
    this.ignoreCommentsFlag = false;
    this.scanNumbersFlag = false;
    this.scanStringsFlag = false;
+   this.commentStructure = 'c';
    this.savedCharacters = [ ];
    this.savedTokens = [ ];
    this.operators = { };
@@ -60,7 +61,19 @@ TokenScanner.prototype.setInput = function(str) {
    this.savedCharacters = [ ];
    this.savedTokens = [ ];
    this.lineNumberMap = this.makeLineNumberMap(str)
+   this.lineIndentMap = this.makeLineIndentMap(str)
+   console.log('line number')
+   console.log(this.lineNumberMap)
+   console.log('indent level')
+   console.log(this.lineIndentMap)
 };
+
+TokenScanner.prototype.setCommentStructure = function(str) {
+   if(str != 'c' && str != 'python') {
+      console.error('unsupported comment structure ', str)
+   }
+   this.commentStructure = str;
+}
 
 /*
  * Method: hasMoreTokens
@@ -76,6 +89,16 @@ TokenScanner.prototype.hasMoreTokens = function() {
    return token.text != "";
 };
 
+TokenScanner.prototype.nextTokenIndentLevel = function() {
+   if(!this.hasMoreTokens()) {
+      throw new Error("no more tokens")
+   }
+   var token = this.nextToken()
+   this.saveToken(token)
+   let lineNumber = token.lineNumber;
+   return this.lineIndentMap[lineNumber];
+}
+
 /*
  * Method: nextToken
  * Usage: token = scanner.nextToken();
@@ -85,6 +108,7 @@ TokenScanner.prototype.hasMoreTokens = function() {
  */
 
 TokenScanner.prototype.nextToken = function() {
+
    if (this.savedTokens.length != 0) {
       return this.savedTokens.pop();
    }
@@ -92,26 +116,47 @@ TokenScanner.prototype.nextToken = function() {
       if (this.ignoreWhitespaceFlag) this.skipSpaces();
       var ch = this.getChar();
       if (ch == "") return this.makeToken("");
-      if (ch == '/' && this.ignoreCommentsFlag) {
-         ch = this.getChar();
-         if (ch == '/') {
+
+      // special case for c type comments
+      if(this.commentStructure == 'c') {
+         if (ch == '/' && this.ignoreCommentsFlag) {
+            ch = this.getChar();
+            if (ch == '/') {
+               while (true) {
+                  ch = this.getChar();
+                  if (ch == '\n' || ch == '\r' || ch == "") break;
+               }
+               continue;
+            } else if (ch == '*') {
+               var prev = "";
+               while (true) {
+                  ch = this.getChar();
+                  if (ch == "" || (prev == '*' && ch == '/')) break;
+                  prev = ch;
+               }
+               continue;
+            }
+            this.saveChar(ch);
+            ch = '/';
+         }
+      }
+
+      // special case for python comments
+      if(this.commentStructure == 'python') {
+         if (ch == '#' && this.ignoreCommentsFlag) {
+            console.log('found a python comment')
             while (true) {
                ch = this.getChar();
+               console.log(ch)
                if (ch == '\n' || ch == '\r' || ch == "") break;
             }
             continue;
-         } else if (ch == '*') {
-            var prev = "";
-            while (true) {
-               ch = this.getChar();
-               if (ch == "" || (prev == '*' && ch == '/')) break;
-               prev = ch;
-            }
-            continue;
          }
-         this.saveChar(ch);
-         ch = '/';
+         // NOTE: so far I haven't specifically supported 
+         // multi-line comments. 
       }
+
+      // strings
       if ((ch == '"' || ch == '\'') && this.scanStringsFlag) {
          this.saveChar(ch);
          return this.makeToken(this.scanString());
@@ -168,13 +213,45 @@ TokenScanner.prototype.saveToken = function(token) {
  * throws an error.
  */
 
-TokenScanner.prototype.verifyToken = function(expectedType) {
+TokenScanner.prototype.verifyToken = function(expected) {
    var token = this.nextToken();
-   if (token.text != expectedType) {
-      var msg = "Found \"" + token.text + "\" when expecting \"" + expectedType + "\"";
+   if (token.text != expected) {
+      var found = token.text
+      var msg = "Found \"" + token.text + "\" when expecting \"" + expected + "\".";
+      msg += "\nLine: " + token.lineNumber
       throw new Error(msg);
    }
 };
+
+// note that no more tokens counts as a newline
+TokenScanner.prototype.verifyNewline = function() {
+   while(true) {
+      var ch = this.getChar();
+      if(ch == "") {
+         return;
+      }
+      if (!isspace(ch)) {
+         if (this.iscomment(ch)) {
+            return;
+         } else {
+            let lineNumber = this.lineNumberMap[this.cp]
+            var msg = "Was expecting a new line and found \""+ch+"\"";
+            msg += '\nLine ' + lineNumber;
+            throw new Error(msg);
+         }
+      }
+      if(ch == '\n') {
+         return;
+      }
+   };
+}
+
+TokenScanner.prototype.iscomment = function(ch) {
+   if(this.commentStructure != 'python') {
+      throw new Error("verify newline is not implemented outside python")
+   }
+   return ch == '#'
+}
 
 /*
  * Method: setIgnoreWhitespaceFlag
@@ -647,7 +724,7 @@ TokenScanner.prototype.isOperatorPrefix = function(op) {
 
 // relates character index to line number in source code
 TokenScanner.prototype.makeLineNumberMap = function(str) {
-   var lineNumMap = []
+   var lineNumMap = {}
    var currLineNumber = 0
    for(var cp = 0; cp < str.length; cp++) {
       var ch = str.charAt(cp)
@@ -657,4 +734,31 @@ TokenScanner.prototype.makeLineNumberMap = function(str) {
       }
    }
    return lineNumMap
+}
+
+// relates line number to indentation level
+TokenScanner.prototype.makeLineIndentMap = function(str) {
+   var lineNumMap = {}
+   var lines = str.split('\n')
+   for (var i = 0; i < lines.length; i++) {
+      let currLine = lines[i];
+      let indentLevel = this.getIndentLevel(currLine)
+      lineNumMap[i] = indentLevel;
+   }
+   return lineNumMap
+}
+
+// calculates the indent amount for a line
+TokenScanner.prototype.getIndentLevel = function(str) {
+   var indentLevel = 0
+   for(var cp = 0; cp < str.length; cp++) {
+      var ch = str.charAt(cp)
+      var isWhitespace = /\s/.test(ch)
+      if(!isWhitespace) {
+         return indentLevel;
+      }
+      indentLevel++;
+   }
+   // if a string is all whitespace
+   return str.length
 }

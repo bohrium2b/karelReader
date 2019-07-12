@@ -1,8 +1,8 @@
 
 
 function importCss() {
-   var html = '<link rel="stylesheet" href="../karel/css/style.css" type="text/css" />';
-   html += '<link rel="stylesheet" href="../karel/boxy/stylesheets/boxy.css" type="text/css" />';
+   var html = '<link rel="stylesheet" href="../../karel/css/style.css" type="text/css" />';
+   html += '<link rel="stylesheet" href="../../karel/boxy/stylesheets/boxy.css" type="text/css" />';
    document.write(html);
 }
 
@@ -69,6 +69,36 @@ function importCss() {
       return worldSelector;
    }
 
+function importPythonEditor(id, parentId, source, editable) {
+
+   var code = document.createElement('div');
+   code.innerHTML = source;
+   code.id        = id;
+   code.className     = 'ideEditor'
+   var editorDiv = document.getElementById(parentId);
+   console.log(editorDiv)
+   editorDiv.appendChild(code); 
+   var editor = ace.edit(id);
+   editor.setTheme('ace/theme/eclipse');
+   var JavaMode = require("ace/mode/python").Mode;
+   editor.getSession().setMode(new JavaMode());
+   // make it so that the text isn't horizontally scrolled
+   editor.getSession().setUseWrapMode(true);
+   // can the user modify the code?
+   editor.setReadOnly(!editable);
+   // default tab size is 3
+   editor.getSession().setOptions({
+        tabSize: 3,
+        useSoftTabs: true
+    });
+   // no line numbers by default
+   editor.renderer.setShowGutter(false);
+   // this line turns off automatic error detection
+   editor.getSession().setUseWorker(false);
+   code.style.fontSize='13px';
+   return editor; 
+}
+
 function importEditorCode(id, parentId, source, editable) {
 
    var code = document.createElement('div');
@@ -119,20 +149,21 @@ function importScripts(list) {
 
 function importJsLibraries() {
    var scripts = [
-      '<script src="../karel/lib/jquery.js"></script>',
-      '<script src="../karel/lib/browser_detect.js"></script>',
-      '<script src="../karel/lib/util.js"></script>',
-      '<script src="../karel/lib/tabs.js"></script>',
-      '<script src="../karel/codeMirror/js/codemirror.js"></script>',
-      '<script src="../karel/ace/ace.js"></script>',
-      '<script src="../karel/ace/theme-eclipse.js"></script>',
-      '<script src="../karel/ace/mode-javascript.js"></script>',
-      '<script src="../karel/ace/mode-java.js"></script>',
-      '<script src="../karel/lib/curvycorners.js"></script>',
-	   '<script src="../karel/lib/jquery.js"></script>',
+      '<script src="../../karel/lib/jquery.js"></script>',
+      '<script src="../../karel/lib/browser_detect.js"></script>',
+      '<script src="../../karel/lib/util.js"></script>',
+      '<script src="../../karel/lib/tabs.js"></script>',
+      '<script src="../../karel/codeMirror/js/codemirror.js"></script>',
+      '<script src="../../karel/ace/ace.js"></script>',
+      '<script src="../../karel/ace/theme-eclipse.js"></script>',
+      '<script src="../../karel/ace/mode-javascript.js"></script>',
+      '<script src="../../karel/ace/mode-java.js"></script>',
+      '<script src="../../karel/ace/mode-python.js"></script>',
+      '<script src="../../karel/lib/curvycorners.js"></script>',
+	   '<script src="../../karel/lib/jquery.js"></script>',
       //'<script src="http://cdn.jquerytools.org/1.2.5/jquery.tools.min.js"></script>',
-      '<script src="../karel/boxy/jquery.boxy.js"></script>',
-      '<script src="../karel/lib/swal.min.js"></script>'
+      '<script src="../../karel/boxy/jquery.boxy.js"></script>',
+      '<script src="../../karel/lib/swal.min.js"></script>'
    ]
    importScripts(scripts);
 }
@@ -140,21 +171,21 @@ function importJsLibraries() {
 
 function importKarelIde() {
    var scripts = [
-		'<script src="../karel/js/ide/karelImages.js"></script>',
-		'<script src="../karel/js/ide/karelSingleton.js"></script>',
-		'<script src="../karel/js/ide/karelConstants.js"></script>',
-		'<script src="../karel/js/ide/action.js"></script>',
-		'<script src="../karel/js/ide/beepers.js"></script>',
-		'<script src="../karel/js/ide/walls.js"></script>',
-		'<script src="../karel/js/ide/squareColors.js"></script>',
-		'<script src="../karel/js/ide/canvasModel.js"></script>',
-		'<script src="../karel/js/ide/karelModel.js"></script>',
-		'<script src="../karel/js/ide/karelView.js"></script>',
-		'<script src="../karel/js/ide/karel.js"></script>',
-		'<script src="../karel/js/ide/karelCompiledEngine.js"></script>',
-		'<script src="../karel/js/ide/karelEvalEngine.js"></script>',
-		'<script src="../karel/js/ide/karelIde.js"></script>',
-		'<script src="../karel/js/html/starterCode.js"></script>',
+		'<script src="../../karel/js/ide/karelImages.js"></script>',
+		'<script src="../../karel/js/ide/karelSingleton.js"></script>',
+		'<script src="../../karel/js/ide/karelConstants.js"></script>',
+		'<script src="../../karel/js/ide/action.js"></script>',
+		'<script src="../../karel/js/ide/beepers.js"></script>',
+		'<script src="../../karel/js/ide/walls.js"></script>',
+		'<script src="../../karel/js/ide/squareColors.js"></script>',
+		'<script src="../../karel/js/ide/canvasModel.js"></script>',
+		'<script src="../../karel/js/ide/karelModel.js"></script>',
+		'<script src="../../karel/js/ide/karelView.js"></script>',
+		'<script src="../../karel/js/ide/karel.js"></script>',
+		'<script src="../../karel/js/ide/karelCompiledEngine.js"></script>',
+		'<script src="../../karel/js/ide/karelEvalEngine.js"></script>',
+		'<script src="../../karel/js/ide/karelIde.js"></script>',
+		'<script src="../../karel/js/html/starterCode.js"></script>',
 	]
 	importScripts(scripts);
 		
@@ -162,14 +193,16 @@ function importKarelIde() {
 
 function importCompiler() {
    var scripts = [ 
-      '<script src="../karel/js/compiler/karelCompiler.js"></script>',
-      '<script src="../karel/js/compiler/scanner/TokenScanner.js"></script>',
-      '<script src="../karel/js/compiler/parser/Parser.js"></script>',
-      '<script src="../karel/js/compiler/parser/XParser.js"></script>',
-      '<script src="../karel/js/compiler/vm/VM.js"></script>',
-      '<script src="../karel/js/compiler/vm/XVM.js"></script>',
-      '<script src="../karel/js/compiler/karel/KarelParser.js"></script>',
-      '<script src="../karel/js/compiler/karel/KarelVM.js"></script>'
+      '<script src="../../karel/js/compiler/karelJavaCompiler.js"></script>',
+      '<script src="../../karel/js/compiler/karelPythonCompiler.js"></script>',
+      '<script src="../../karel/js/compiler/scanner/TokenScanner.js"></script>',
+      '<script src="../../karel/js/compiler/parser/Parser.js"></script>',
+      '<script src="../../karel/js/compiler/parser/XParser.js"></script>',
+      '<script src="../../karel/js/compiler/vm/VM.js"></script>',
+      '<script src="../../karel/js/compiler/vm/XVM.js"></script>',
+      '<script src="../../karel/js/compiler/karel/KarelParser.js"></script>',
+      '<script src="../../karel/js/compiler/karel/KarelPythonParser.js"></script>',
+      '<script src="../../karel/js/compiler/karel/KarelVM.js"></script>'
    ]
    importScripts(scripts);	
 }
@@ -177,42 +210,42 @@ function importCompiler() {
 function importLearnEngine() {
    var scripts = [
 
-		'<script src="../karel/js/learn/makeAbsoluteDiv.js"></script>',
-		'<script src="../karel/js/learn/unitProgress.js"></script>',
-		'<script src="../karel/js/learn/progressModel.js"></script>',
-		'<script src="../karel/js/learn/lessonsModel.js"></script>',
-		'<script src="../karel/js/learn/homeScreen.js"></script>',
-		'<script src="../karel/js/learn/textElement.js"></script>',
-		'<script src="../karel/js/learn/textButton.js"></script>',
-		'<script src="../karel/js/learn/unitBox.js"></script>',
-		'<script src="../karel/js/learn/imageElement.js"></script>',
-		'<script src="../karel/js/learn/unitTestElement.js"></script>',
-		'<script src="../karel/js/learn/textBox.js"></script>',
-		'<script src="../karel/js/learn/videoElement.js"></script>',
-		'<script src="../karel/js/learn/karelCommandButton.js"></script>',
-		'<script src="../karel/js/learn/karelEditorElement.js"></script>',
-		'<script src="../karel/js/learn/karelStaticCanvasElement.js"></script>',
-		'<script src="../karel/js/learn/karelCanvasElement.js"></script>',
-		'<script src="../karel/js/learn/karelIdeMessage.js"></script>',
-		'<script src="../karel/js/learn/karelIdeButtons.js"></script>',
-		'<script src="../karel/js/learn/karelIdeElement.js"></script>',
-		'<script src="../karel/js/learn/programElement.js"></script>',
-		'<script src="../karel/js/learn/imageButton.js"></script>',
-		'<script src="../karel/js/learn/content.js"></script>',
-		'<script src="../karel/js/learn/centerArea.js"></script>',
-		'<script src="../karel/js/learn/titleElement.js"></script>',
-		'<script src="../karel/js/learn/header.js"></script>',
-		'<script src="../karel/js/learn/progressBox.js"></script>',
-		'<script src="../karel/js/learn/progressBar.js"></script>',
-		'<script src="../karel/js/learn/karelLearnEngine.js"></script>',
+		'<script src="../../karel/js/learn/makeAbsoluteDiv.js"></script>',
+		'<script src="../../karel/js/learn/unitProgress.js"></script>',
+		'<script src="../../karel/js/learn/progressModel.js"></script>',
+		'<script src="../../karel/js/learn/lessonsModel.js"></script>',
+		'<script src="../../karel/js/learn/homeScreen.js"></script>',
+		'<script src="../../karel/js/learn/textElement.js"></script>',
+		'<script src="../../karel/js/learn/textButton.js"></script>',
+		'<script src="../../karel/js/learn/unitBox.js"></script>',
+		'<script src="../../karel/js/learn/imageElement.js"></script>',
+		'<script src="../../karel/js/learn/unitTestElement.js"></script>',
+		'<script src="../../karel/js/learn/textBox.js"></script>',
+		'<script src="../../karel/js/learn/videoElement.js"></script>',
+		'<script src="../../karel/js/learn/karelCommandButton.js"></script>',
+		'<script src="../../karel/js/learn/karelEditorElement.js"></script>',
+		'<script src="../../karel/js/learn/karelStaticCanvasElement.js"></script>',
+		'<script src="../../karel/js/learn/karelCanvasElement.js"></script>',
+		'<script src="../../karel/js/learn/karelIdeMessage.js"></script>',
+		'<script src="../../karel/js/learn/karelIdeButtons.js"></script>',
+		'<script src="../../karel/js/learn/karelIdeElement.js"></script>',
+		'<script src="../../karel/js/learn/programElement.js"></script>',
+		'<script src="../../karel/js/learn/imageButton.js"></script>',
+		'<script src="../../karel/js/learn/content.js"></script>',
+		'<script src="../../karel/js/learn/centerArea.js"></script>',
+		'<script src="../../karel/js/learn/titleElement.js"></script>',
+		'<script src="../../karel/js/learn/header.js"></script>',
+		'<script src="../../karel/js/learn/progressBox.js"></script>',
+		'<script src="../../karel/js/learn/progressBar.js"></script>',
+		'<script src="../../karel/js/learn/karelLearnEngine.js"></script>',
 	]
 	importScripts(scripts);	
 }
 
 function importReference() {
    var scripts = [
-		'<script src="../karel/js/dialog/referenceDialog.js"></script>',
-		'<script src="../karel/js/dialog/deployDialog.js"></script>',
+		'<script src="../../karel/js/dialog/referenceDialog.js"></script>',
+		'<script src="../../karel/js/dialog/deployDialog.js"></script>',
 	]
 	importScripts(scripts);	
 }

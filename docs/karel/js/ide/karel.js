@@ -8,6 +8,8 @@
  */
 function Karel(canvasModel, language) {
 
+  let PATH_TO_ROOT = '../../'
+
   console.log('lang', language)
 
   // uses a flag to know if it is loaded
@@ -146,7 +148,7 @@ function Karel(canvasModel, language) {
   }
 
   // load language API
-  let path = "../karel/js/api/" + language + ".json"
+  let path = PATH_TO_ROOT + "/karel/js/api/" + language + ".json"
   loadDoc(path, function(jsonTxt) {
     var json = JSON.parse(jsonTxt)
     initLanguageAPI(json)
